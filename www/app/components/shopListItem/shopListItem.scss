@@ -1,0 +1,19 @@
+shop-list-item{
+	.shop-item{
+		padding: 10px 75px 10px 15px;
+
+		.shop-item-btn{
+			min-height: 24px;
+			line-height: 24px;
+			top: 50%;
+			right: 15px;
+			transform: translateY(-50%);
+
+			.icon:before{
+				font-size: 16px;
+				line-height: 24px;
+			}
+		}
+	}
+}
+    

@@ -1,0 +1,73 @@
+
+
+<ion-item ng-if="$ctrl.item.product">
+  
+  <div class="row no-padding">
+    <div class="col no-padding">
+      {{$ctrl.item.product.name}} ({{$ctrl.item.productVariant.name}})
+    </div>
+    <div class="col no-padding text-right">
+      <div>
+        <span>x {{$ctrl.item.quantity}}</span>
+        <span class="padding-left">{{($ctrl.item.unitPrice-$ctrl.item.unitDiscount) * $ctrl.item.quantity | currency:$ctrl.currency}}</span>
+      </div>
+      <div>
+        <button class="btn btn-link btn-danger" ng-click="$ctrl.removeFromCart()">Remove</button>
+      </div>
+    </div>
+  </div>
+  <div class="option-detail" ng-if="$ctrl.item.optionValues.length > 0">
+    <div><b>Options</b></div>
+    <div ng-repeat="optionValue in $ctrl.item.optionValues">
+      - {{optionValue.option.name}} ({{optionValue.value}})
+    </div>
+  </div>
+</ion-item>
+
+<ion-item ng-if="$ctrl.item.productValuePack">
+  <div class="row no-padding">
+    <div class="col no-padding">
+      {{$ctrl.item.productValuePack.name}} (Value pack)
+    </div>
+    <div class="col no-padding text-right">
+       <div>
+          <span>x {{$ctrl.item.quantity}}</span>
+          <span class="padding-left">{{($ctrl.item.unitPrice-$ctrl.item.unitDiscount) * $ctrl.item.quantity | currency:$ctrl.currency}}</span>
+        </div>
+        <div>
+          <button class="btn btn-link btn-danger" ng-click="$ctrl.removeFromCart()">Remove</button>
+        </div>
+    </div>
+  </div>
+ 
+  <div class="option-detail">
+    <div><b>Item list</b></div>
+    <div ng-repeat="item in $ctrl.item.order_items">
+      {{item.product.name}} ({{item.productVariant.name}})
+        <div class="option-detail" style="margin-top: 0;margin-left: 10px">
+          <div><b>Options</b></div>
+          <div ng-repeat="optionValue in $ctrl.item.optionValues">
+            - {{optionValue.option.name}} ({{optionValue.value}})
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="option-detail">
+    <div><b>Promotions</b></div>
+    <div ng-repeat="promotion in $ctrl.item.productValuePack.promotions">
+      <div>
+        {{promotion.name}}
+      </div>
+      <div ng-if="promotion.discount_percent">
+        {{promotion.discount_amount}}% off
+      </div>
+      <div ng-if="!promotion.discount_percent">
+        {{promotion.discount_amount | currency:$ctrl.currency}} off
+      </div>
+    </div>
+  </div>
+  <ion-option-button class="button-assertive" ng-click="$ctrl.removeFromCart($ctrl.item)">
+    Delete
+  </ion-option-button>
+
+</ion-item>

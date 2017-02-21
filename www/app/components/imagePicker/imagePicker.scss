@@ -1,0 +1,13 @@
+image-picker{
+  position:relative;
+  display:inline-block;
+  overflow:hidden;
+  .image-container{
+    width:100%;
+    height:0px;
+    padding-bottom:100%;
+    background-position: center center;
+    background-size:cover;
+    background-repeat: no-repeat;
+  }
+}

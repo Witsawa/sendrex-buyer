@@ -1,0 +1,98 @@
+<ion-view view-title="OrderDetail" class="order-detail-page">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="item in $ctrl.order.orderItems">
+
+        <!--orderitem (product)-->
+        <div ng-if="item.product">
+          <label>
+            {{item.product.name}} ({{item.productVariant.name}})
+            <span class="pull-right"> {{item.productVariant.price | currency:$ctrl.currency}}</span>
+          </label>
+          <div class="option-detail">
+            <div ng-if="item.productOptionValues.length"><b>Options</b></div>
+            <div ng-repeat="option in item.productOptionValues">
+              - {{option.productOption.name}} ({{option.value}})
+              <span class="pull-right">+ {{option.price | currency:$ctrl.currency}}</span>
+            </div>
+          </div>
+          <div class="option-detail">
+            <div><b>Promotions</b></div>
+            <div ng-repeat="promotion in item.product.promotions">
+              - {{promotion.name}} ({{promotion.discount_amount}}{{promotion.discount_percent?"%":""}} Off)
+            </div>
+          </div>
+        </div>
+        <!--orderitem (value pack)-->
+        <div ng-if="item.productValuePack">
+          <label>
+            {{item.productValuePack.name}} (Value pack)
+            <span class="pull-right"> {{item.productValuePack.price | currency:$ctrl.currency}}</span>
+          </label>
+          <div class="option-detail">
+            <div><b>Item list</b></div>
+            <div ng-repeat="subitem in item.orderItems">
+              <div>
+                {{subitem.product.name}} ({{subitem.productVariant.name}})
+                <span class="pull-right">+ {{subitem.productVariant.price - subitem.unitDiscount | currency:$ctrl.currency}}</span>
+              </div>
+              <div class="option-detail" style="margin-top: 0;margin-left: 10px">
+                <div ng-if="subitem.productOptionValues.length"><b>Options</b></div>
+                <div ng-repeat="option in subitem.productOptionValues">
+                  - {{option.productOption.name}} ({{option.value}})
+                  <span class="pull-right">+ {{option.price | currency:$ctrl.currency}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="option-detail">
+            <div><b>Promotions</b></div>
+            <div ng-repeat="promotion in item.productValuePack.promotions">
+              - {{promotion.name}} ({{promotion.discount_amount}}{{promotion.discount_percent?"%":""}} Off)
+            </div>
+          </div>
+        </div>
+
+        <div class="padding-top">
+          <label>Unit price</label>
+          <span class="pull-right">
+            {{item.unitPrice | currency:$ctrl.currency}}
+          </span>
+        </div>
+
+        <div >
+          <label>Unit discount</label>
+          <span class="pull-right">
+            - {{item.unitDiscount | currency:$ctrl.currency}}
+          </span>
+        </div>
+        <div>
+          <label>Quantity</label>
+          <span class="pull-right">
+            {{item.quantity}}
+          </span>
+        </div>
+        <div>
+          <label>Total</label>
+          <span class="pull-right">
+            <b>{{(item.unitPrice - item.unitDiscount) * item.quantity | currency:$ctrl.currency}}</b>
+          </span>
+        </div>
+
+      </ion-item>
+      <ion-item>
+        <span class="h5">Total price</span>
+        <span class="pull-right">
+          {{($ctrl.order.total_price- $ctrl.order.total_discount) | currency:$ctrl.currency}}
+        </span>
+      </ion-item>
+      <ion-item>
+        <span class="h5">Order status</span>
+        <span class="pull-right">
+          {{$ctrl.order.status }}
+        </span>
+      </ion-item>
+      <button class="button button-assertive button-full" ng-if="$ctrl.order.status=='pending'" ng-click="$ctrl.cancelOrder($ctrl.order)">Cancel</button>
+    </ion-list>
+  </ion-content>
+</ion-view>

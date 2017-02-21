@@ -1,0 +1,51 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <button class="button button-clear" ng-click="$ctrl.addToCartModal.hide()">Cancel</button>
+    <h1 class="title">
+      Add to cart
+    </h1>
+  </ion-header-bar>
+  <ion-content scroll="false" class="has-footer has-subfooter">
+    <ion-slides ion-wizard slider="swiper" options="swiperOptions">
+      <ion-slide-page ion-wizard-step next-condition="item.productVariantId != undefined" ng-if="$ctrl.hasVariant($ctrl.products)">
+        <ion-content>
+
+          <ion-list>
+            <ion-radio ng-model="item.productVariantId" ng-value="variant.id" ng-repeat="variant in $ctrl.product.productVariants">
+              {{$ctrl.product.name}} ({{variant.name || variant.SKU}})
+              <span class="item-note dark"> + {{variant.price | currency:$ctrl.product.shop.currency}}</span>
+            </ion-radio>
+          </ion-list>
+        </ion-content>
+      </ion-slide-page>
+      <ion-slide-page ion-wizard-step ng-if="$ctrl.product.enableOptions" >
+        <ion-content>
+          <ion-list ng-init="item.product_option_values = {}">
+            <ion-item class="item-divider" ng-repeat-start="option in $ctrl.product.productOptions">
+              {{option.name}} {{option.multiple_select?"(Can select more than one choice)":""}} {{option.error}}
+            </ion-item>
+            <ion-checkbox ng-change="$ctrl.optionSelected(optionChoice.id,item.product_option_values, option)" ng-model="item.product_option_values[optionChoice.id].checked" ng-init="item.product_option_values[optionChoice.id] = {checked:false,price:optionChoice.price}" ng-repeat="optionChoice in option.productOptionValues" ng-repeat-end>
+              {{optionChoice.value}}
+              <span class="item-note dark"> + {{optionChoice.price | currency:$ctrl.product.shop.currency}}</span>
+            </ion-checkbox>
+          </ion-list>
+        </ion-content>
+      </ion-slide-page>
+    </ion-slides>
+  </ion-content>
+  <ion-footer-bar class="bar-subfooter bar-positive item-input-inset">
+    <button class="button button-clear button-icon" ng-click=" item.quantity = item.quantity - 1"><i class="icon ion-minus"></i></button>
+    <label class="item-input-wrapper">
+      <i class="placeholder-icon">Amount</i>
+      <input type="number" placeholder="Amount" ng-model="item.quantity" ng-init="item.quantity = 1" class="text-right">
+      <i class="placeholder-icon">Unit</i>
+    </label>
+    <button class="button button-clear button-icon" ng-click="item.quantity = item.quantity + 1"><i class="icon ion-plus"></i></button>
+    <label class="padding">Price {{totalPrice | currency:$ctrl.product.shop.currency}}</label>
+  </ion-footer-bar>
+  <ion-footer-bar class="bar-positive">
+
+      <button class="button button-clear pull-right" ion-wizard-next ng-if="$ctrl.product.enableVariants && $ctrl.product.enableOptions">Next</button>
+      <button class="button button-clear pull-right" ion-wizard-start="$ctrl.addToCart(item)" ng-show="!($ctrl.product.enableVariants && $ctrl.product.enableOptions)">Add to cart</button>
+  </ion-footer-bar>
+</ion-modal-view>

@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="shop-image" style="background-image:url({{$ctrl.shop.image}}),url(http://placehold.it/200x200);">
+
+  </div>
+  <div class="col">
+    <div>{{$ctrl.shop.name}}</div>
+    <div>{{$ctrl.shop.location.formatted_address || "Unknown"}}</div>
+    <div class="row">
+      <div class="col">
+        <button class="button button-positive button-block button-small">Follow</button>
+      </div>
+      <div class="col">
+        <button class="button button-positive button-block button-small">Message</button>
+      </div>
+    </div>
+  </div>
+</div>

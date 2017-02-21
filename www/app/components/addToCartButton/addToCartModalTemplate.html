@@ -1,0 +1,75 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-dark">
+    <button class="button button-clear" ng-click="$ctrl.addToCartModal.hide()">Cancel</button>
+    <h1 class="title">
+      Add to cart
+    </h1>
+  </ion-header-bar>
+  <ion-content scroll="false" class="has-footer">
+    <ion-slides ion-wizard slider="swiper" options="swiperOptions">
+      <ion-slide-page ion-wizard-step next-condition="$ctrl.validateProduct(product)" ng-repeat="product in item.products" ng-if="product.enableVariants || product.enableOptions">
+        <ion-content>
+          <div ng-show="product.enableVariants" class="margin-bottom-10">
+            <div class="padding h-title">
+              Variants
+            </div>
+            <div class="list-inset list list-inset-0">
+              <ion-radio name="productVariant-product{{product.id}}" ng-model="product.selectedProductVariantId" ng-value="variant.id" ng-repeat="variant in product.productVariants">
+                  {{product.name}} ({{variant.name || variant.SKU}})
+                <span class="item-note dark"> + {{variant.price - (item.productValuePackId?product.productVariants[0].price:0) | currency:product.shop.currency}}</span>
+              </ion-radio>
+            </div>
+          </div>
+          <div ng-show="product.enableOptions">
+            <div class="padding h-title">
+              Options
+            </div>
+            <div class="list-inset list list-inset-0">
+              <ion-item class="item-divider" ng-repeat-start="option in product.productOptions">
+                {{option.name}} {{option.multiple_select?"(Can select more than one choice)":""}} {{option.error}}
+              </ion-item>
+              <ion-checkbox ng-change=" $ctrl.onOptionSelected(option,optionValue)"  ng-model="optionValue.checked" ng-repeat="optionValue in option.productOptionValues" ng-repeat-end>
+                {{optionValue.value}}
+                <span class="item-note dark"> + {{optionValue.price | currency:product.shop.currency}}</span>
+              </ion-checkbox>
+            </div>
+          </div>
+        </ion-content>
+
+      </ion-slide-page>
+      <ion-slide-page>
+        <ion-content>
+          <ion-list>
+            <ion-item>
+              <label>Quantity</label>
+              <span class="item-note item-note-dark">
+                <input type="number" ng-model="item.quantity" style="display: inline-block;width: 50px;height: 16px;">
+                Unit
+              </span>
+            </ion-item>
+            <ion-item>
+              <label>Total</label>
+              <span class="item-note item-note-dark">
+                {{totalPrice*item.quantity | currency:item.products[0].shop.currency}}
+              </span>
+            </ion-item>
+            <ion-item ng-if="promotions.length">
+              <label>Discounted price</label>
+              <span class="item-note item-note-dark">
+                {{totalPrice*item.quantity*((100-promotions[0].discount_amount)/100) | currency:item.products[0].shop.currency}}
+              </span>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-slide-page>
+
+    </ion-slides>
+  </ion-content>
+
+  <ion-footer-bar class="bar-positive">
+    <button class="button button-clear" ion-wizard-previous ><i class="icon ion-ios-arrow-left"></i> Back</button>
+    <h1 class="title"></h1>
+    <button class="button button-clear pull-right" ion-wizard-next >Next <i class="icon ion-ios-arrow-right"></i></button>
+    <button class="button button-clear pull-right" ion-wizard-start="$ctrl.addToCart(item)" condition="$ctrl.validateItem(item)">Add to cart</button>
+  </ion-footer-bar>
+</ion-modal-view>

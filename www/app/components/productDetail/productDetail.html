@@ -1,0 +1,32 @@
+<ion-list>
+  <div class="product-images">
+    <ion-slides  options="{}" slider="data.slider">
+      <ion-slide-page ng-repeat="image in $ctrl.product.images" class="text-center">
+        <img ng-src="{{image}}">
+      </ion-slide-page>
+    </ion-slides>
+    <wish-list-button product='$ctrl.product'></wish-list-button>
+  </div>
+  <ion-item class="product-body">
+    <div class="product-body-seperate" style="width: 70%;">
+      <h4 class="product-name">{{$ctrl.product.name}}</h4>
+    </div>
+    <div class="product-body-seperate text-right" style="width: 30%;">
+      <div ng-if="$ctrl.isFreeShipping()" class="balanced free-shipping-text">Free Shipping</div>
+      <div style='{{$ctrl.product.promotions.length>0?"text-decoration:line-through;":""}}' >{{$ctrl.product.productVariants[0].price | currency:$ctrl.product.shop.currency}}</div>
+      <div ng-if="$ctrl.product.promotions.length>0" class="assertive">{{$ctrl.product.productVariants[0].price - ($ctrl.product.productVariants[0].price * ($ctrl.product.promotions[0].discount_amount/100)) | currency:$ctrl.product.shop.currency}}</div>
+    </div>
+    <div class="product-desc">{{$ctrl.product.description}}</div>
+    <div class="product-delivery">
+      <div class="product-body-seperate" style="width: 60%;">
+        Delivery by <a ui-sref="sidemenu.home.shopDetail({id:$ctrl.product.shop.id})">{{$ctrl.product.shop.name}}</a>
+      </div>
+      <div class="product-body-seperate text-right" style="width: 40%;">
+        <button class="button button-positive button-small">Follow</button>
+        <button class="button button-positive button-small">Message</button>
+      </div>
+    </div>
+    
+  </ion-item>
+</ion-list>
+<add-to-cart-button product="$ctrl.product"></add-to-cart-button>

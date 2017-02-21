@@ -1,0 +1,22 @@
+<ion-list>
+  <ion-item class="item-floating-label text-center">
+    <image-picker class="profile-image" ng-model="$ctrl.profile.image"></image-picker>
+    <div>{{$ctrl.profile.displayname || $ctrl.profile.email}}</div>
+  </ion-item>
+  <ion-item class="item-input item-floating-label">
+    <label class="input-label">Display name</label>
+    <input type="text" ng-model="$ctrl.profile.displayname" placeholder="Display name">
+  </ion-item>
+  <ion-item class="item-input item-floating-label">
+    <label class="input-label">First name</label>
+    <input type="text" ng-model="$ctrl.profile.firstname" placeholder="First name">
+  </ion-item>
+  <ion-item class="item-input item-floating-label">
+    <label class="input-label">Last name</label>
+    <input type="text" ng-model="$ctrl.profile.lastname" placeholder="Last name">
+  </ion-item>
+  <ion-item class="item-input item-floating-label">
+    <label class="input-label">Date of birth</label>
+    <date-picker ng-model="$ctrl.profile.date_of_birth"></date-picker>
+  </ion-item>
+</ion-list>

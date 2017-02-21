@@ -1,0 +1,14 @@
+import template from './imagePicker.html';
+import controller from './imagePicker.controller';
+import './imagePicker.scss';
+
+let imagePickerComponent = {
+  restrict: 'E',
+  bindings: {
+    ngModel:'='
+  },
+  template,
+  controller
+};
+
+export default imagePickerComponent;

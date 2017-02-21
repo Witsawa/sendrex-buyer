@@ -1,0 +1,22 @@
+
+@import '../../styleVariable';
+
+.login-form {
+  margin-top: 20px;
+  background-color:rgba(255,255,255,0.90);
+}
+
+.wrap-btn-login {
+  padding: 20px 10px;
+  border-bottom: 1px solid $border-color;
+}
+
+.wrap-btn-signup {
+  padding: 30px 10px;
+}
+
+.login-background {
+  background-image:url('./../../../img/bg.jpg');
+  background-position:center center;
+  background-size:cover;
+}

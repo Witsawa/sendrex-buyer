@@ -1,0 +1,6 @@
+<ion-list>
+  <div class="row responsive-sm">
+    <product-list-item ng-repeat="product in $ctrl.products" class="col col-50" product="product" ng-click="$ctrl.viewProduct(product.id)">
+    </product-list-item>
+  </div>
+</ion-list>

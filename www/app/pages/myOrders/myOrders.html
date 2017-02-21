@@ -1,0 +1,56 @@
+<ion-view view-title="My Orders" class="my-orders-page">
+  <ion-tabs class="tabs-striped tabs-color-positive tabs-top">
+    <a class="tab-item {{$ctrl.statusFilter=='pending'&&'active'}}" ng-click="$ctrl.statusFilter='pending'">
+      On process
+    </a>
+    <a class="tab-item {{$ctrl.statusFilter=='delivered'&&'active'}}" ng-click="$ctrl.statusFilter='delivered'">
+      Completed
+    </a>
+    <a class="tab-item {{$ctrl.statusFilter=='cancel'&&'active'}}" ng-click="$ctrl.statusFilter='cancel'">
+      Cancelled
+    </a>
+  </ion-tabs>
+  <ion-content class="has-tabs-top">
+    <ion-list>
+      <ion-item ng-repeat="order in filteredOrders = ($ctrl.orders | filter:{status:$ctrl.statusFilter})" ui-sref="sidemenu.orderDetail({id:order.id})">
+        <div>
+          <label>
+            Order ID : {{order.id}}
+            <span class="pull-right">
+              <button class="button button-assertive button-small" ng-if="order.status=='pending'" ng-click="$ctrl.cancelOrder(order)">Cancel</button>
+              <span ng-if="order.status!='pending'"><b>{{order.status}}</b></span>
+            </span>
+          </label>
+        </div>
+        <div>
+          <label>
+            Shop Name : {{order.shop.name}}
+          </label>
+        </div>
+        <div class="option-detail">
+          <div><b>Item list</b></div>
+          <div ng-repeat="item in order.orderItems">
+            <div ng-if="item.product">
+              - {{item.product.name}}
+            </div>
+            <div ng-if="item.productValuePack">
+              - {{item.productValuePack.name}} (Value pack)
+            </div>
+          </div>
+        </div>
+        <div class="padding-top">
+          <label>
+            <b>Total price</b>
+            <span class="pull-right">
+              <b>{{(order.total_price - order.total_discount)| currency:order.shop.currency}}</b>
+            </span>
+          </label>
+        </div>
+      </ion-item>
+
+      <ion-item ng-if="filteredOrders.length==0" style="border-bottom: 0">
+        You don't have any {{$ctrl.statusFilter?$ctrl.statusFilter+" ":""}}order
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

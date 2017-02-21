@@ -1,0 +1,17 @@
+
+@import '../../styleVariable';
+
+my-cart{
+  button {
+    .badge {
+      position: absolute !important;
+      right: -4px;
+      padding: 2px 7px;
+      font-size: 12px;
+      
+      &.badge-assertive{
+      	background: $primary-color;
+      }
+    }
+  }
+}

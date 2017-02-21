@@ -1,0 +1,29 @@
+<ion-modal-view class="value-pack-modal">
+  <ion-header-bar class="bar-dark">
+    <button class="button button-clear" ng-click="$ctrl.valuePackModal.hide()">Cancel</button>
+    <h1 class="title">
+      Pack you may interested
+    </h1>
+    <button class="button button-clear" ng-click="$ctrl.valuePackModal.hide();$ctrl.showAddToCartModal($ctrl.product)">Skip</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="card" ng-repeat="valuePack in valuePacks" ng-init="valuePack.totalPrice = 0" ng-click="$ctrl.selectValuePack(valuePack)">
+      <div class="item item-divider">
+        {{valuePack.name}}
+      </div>
+      <div class="item item-text-wrap">
+        <p ng-repeat="product in valuePack.products" ng-init="valuePack.totalPrice = valuePack.totalPrice+product.productVariants[0].price">
+          <span>{{product.name}}</span>
+          <span class="item-note dark">{{product.productVariants[0].price | currency:product.shop.currency}}</span>
+        </p>
+      </div>
+      <div class="item item-text-wrap">
+        <span>For</span>
+        <span class="item-note dark text-right">
+          <div style='{{valuePack.promotions.length>0?"text-decoration:line-through;":""}}' >{{valuePack.price | currency:$ctrl.product.shop.currency}}</div>
+          <div ng-if="valuePack.promotions.length>0" class="assertive">{{valuePack.price - (valuePack.price * ($ctrl.product.promotions[0].discount_amount/100)) | currency:$ctrl.product.shop.currency}}</div>
+        </span>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
