@@ -1,6 +1,6 @@
 import angular from 'angular';
 import ngResource from 'angular-resource'
-var host = 'https://api.omise.co'
+var host = 'https://vault.omise.co'
 let omiseService = angular.module('omiseService', [
   ngResource
 ])
@@ -11,10 +11,13 @@ let omiseService = angular.module('omiseService', [
 })
 
 
-.factory('OmiseCustomer',['$resource','$httpParamSerializerJQLike','$httpParamSerializer',function($resource,$httpParamSerializerJQLike,$httpParamSerializer){
-    return $resource(host+'/customers/:id',{id:"@id"},{
-        update: {
-          method: 'PATCH'
+.factory('Omise',['$resource','$httpParamSerializerJQLike','$httpParamSerializer',function($resource,$httpParamSerializerJQLike,$httpParamSerializer){
+    return $resource(host+'/tokens',{},{
+        getToken: {
+          method: 'POST',
+          headers: {
+                    'Authorization': 'Basic '+btoa('pkey_test_56r0g7a2gkoj1xglzfn:')
+                }
         }
     });
 }])

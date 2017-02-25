@@ -9,9 +9,14 @@
       <div class="item item-divider">
         Previously used credit card
       </div>
-      <ion-item ng-model="$ctrl.cardIndex" ng-value="$index" ng-repeat="card in $ctrl.cards" on-hold="$ctrl.showActions(card)" ng-click="$ctrl.editCard()">
-        <div>{{card.number}}</div>
-      </ion-item>
+      <ion-radio ion-radio ng-model="$ctrl.cardIndex" ng-value="$index" ng-repeat="card in $ctrl.cards" on-hold="$ctrl.showActions(card)" ng-click="$ctrl.editCard()">
+        <div>
+          <i class="icon ion-card"></i>
+          <span>
+          **** **** **** {{card.last_digits}}
+          </span>
+        </div>
+      </ion-radio>
     </div>
 
 

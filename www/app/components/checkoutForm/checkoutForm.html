@@ -1,5 +1,40 @@
-<div>
+<ion-content>
   <div class="list list-inset">
-    <credit-card-select-item></credit-card-select-item>
+    <ion-item>
+      <div class="row">
+        <div class="col">
+          Subtotal
+        </div>
+        <div class="col text-right">
+          {{$ctrl.data.price | currency}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Discount
+        </div>
+        <div class="col  text-right">
+          {{$ctrl.data.discount | currency}}
+        </div>
+      </div>
+      
+    </ion-item>
+    <ion-item>
+      <div class="row">
+        <div class="col">
+          Total
+        </div>
+        <div class="col  text-right">
+          {{$ctrl.data.total | currency}}
+        </div>
+      </div>
+    </ion-item>
   </div>
+  <div class="list list-inset">
+    <credit-card-select-item ng-model="$ctrl.card"></credit-card-select-item>
+  </div>
+</ion-content>
+
+<div class="bar bar-footer bar-positive">
+  <button class="button button-clear" style="width:100%;" ng-click="$ctrl.checkout()">Checkout</button>
 </div>

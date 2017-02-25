@@ -1,0 +1,43 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-dark">
+    <button type="button" class="button button-clear" ng-click="$ctrl.editModal.hide()">Cancel</button>
+    <h1 class="title">Credit card</h1>
+    <button type="button" class="button button-clear" ng-click="$ctrl.saveCard(card)">Save</button>
+  </ion-header-bar>
+  <ion-content >
+    <div class="list">
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Cardholder Name</span>
+        <input type="text" placeholder="Cardholder name" ng-model="card.name">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Card number</span>
+        <input type="text" placeholder="Card number" ng-model="card.number">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Expiration month</span>
+        <input type="number" placeholder="Expiration month" ng-model="card.expiration_month">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Expiration year</span>
+        <input type="number" placeholder="Expiration year" ng-model="card.expiration_year">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Security code</span>
+        <input type="text" placeholder="Security code" ng-model="card.security_code">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">City</span>
+        <input type="text" placeholder="City" ng-model="card.city">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Postal code</span>
+        <input type="text" placeholder="Postal code" ng-model="card.postal_code">
+      </label>
+    </div>
+
+
+
+  </ion-content>
+</ion-modal-view>
+

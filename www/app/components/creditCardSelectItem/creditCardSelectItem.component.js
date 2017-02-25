@@ -4,7 +4,9 @@ import './creditCardSelectItem.scss';
 
 let creditCardSelectItemComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    ngModel:"="
+  },
   template,
   controller
 };

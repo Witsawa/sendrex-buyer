@@ -1,7 +1,13 @@
 <ion-view view-title="My Orders" class="my-orders-page">
   <ion-tabs class="tabs-striped tabs-color-positive tabs-top">
     <a class="tab-item {{$ctrl.statusFilter=='pending'&&'active'}}" ng-click="$ctrl.statusFilter='pending'">
-      On process
+      Pending
+    </a>
+    <a class="tab-item {{$ctrl.statusFilter=='processing'&&'active'}}" ng-click="$ctrl.statusFilter='processing'">
+      Processing
+    </a>
+    <a class="tab-item {{$ctrl.statusFilter=='delivering'&&'active'}}" ng-click="$ctrl.statusFilter='delivering'">
+      Delivering
     </a>
     <a class="tab-item {{$ctrl.statusFilter=='delivered'&&'active'}}" ng-click="$ctrl.statusFilter='delivered'">
       Completed
@@ -42,7 +48,7 @@
           <label>
             <b>Total price</b>
             <span class="pull-right">
-              <b>{{(order.total_price - order.total_discount)| currency:order.shop.currency}}</b>
+              <b>{{(order.total_price - order.total_discount + order.deliveryFee)| currency:order.shop.currency}}</b>
             </span>
           </label>
         </div>

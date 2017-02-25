@@ -1,4 +1,4 @@
 <ion-item ng-click="$ctrl.openPicker()">
   Credit card
-  <span class="item-note dark truncate" style="max-width:150px"> {{$ctrl.card_number || 'No card'}} <i class="icon ion-chevron-right"></i></span>
+  <span class="item-note dark truncate" style="max-width:150px"> {{$ctrl.cards.length > 0?'**** **** **** '+$ctrl.cards[$ctrl.cardIndex].last_digits: 'Add new card'}} <i class="icon ion-chevron-right"></i></span>
 </ion-item>

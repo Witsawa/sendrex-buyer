@@ -81,9 +81,21 @@
 
       </ion-item>
       <ion-item>
-        <span class="h5">Total price</span>
+        <span class="h5">Subtotal</span>
         <span class="pull-right">
           {{($ctrl.order.total_price- $ctrl.order.total_discount) | currency:$ctrl.currency}}
+        </span>
+      </ion-item>
+      <ion-item>
+        <span class="h5">Delivery fee</span>
+        <span class="pull-right">
+          {{($ctrl.order.deliveryFee) | currency:$ctrl.currency}}
+        </span>
+      </ion-item>
+      <ion-item>
+        <span class="h5">Total</span>
+        <span class="pull-right">
+          {{($ctrl.order.total_price- $ctrl.order.total_discount+$ctrl.order.deliveryFee) | currency:$ctrl.currency}}
         </span>
       </ion-item>
       <ion-item>
