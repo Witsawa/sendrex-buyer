@@ -78,6 +78,7 @@
 	// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 	// the 2nd parameter is an array of 'requires'
 	angular.module('starter', ['ionic', 'ngStorage', 'ngCordova', 'leaflet-directive', 'ion-google-place', _components2.default, _pages2.default, _directives2.default, _angularFilter2.default, _services2.default]).run(function ($ionicPlatform, $ionicLoading, $rootScope, $state, $location, LoopBackAuth) {
+	  //$locationProvider.html5Mode(true)
 	  $ionicPlatform.ready(function () {
 	    if (window.cordova && window.cordova.plugins.Keyboard) {
 	      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -125,6 +126,7 @@
 	  });
 	}).config(function ($urlRouterProvider, LoopBackResourceProvider, $ionicConfigProvider, $httpProvider, $logProvider) {
 	  "ngInject";
+	
 	  // Use a custom auth header instead of the default 'Authorization'
 	
 	  $logProvider.debugEnabled(false);
@@ -3509,6 +3511,7 @@
 	    this._$q = $q;
 	    this._Omise = Omise;
 	    this.cardIndex = 0;
+	    this.cards = [];
 	    self.modal = $ionicModal.fromTemplate(_creditCardSelectModal2.default, {
 	      scope: $scope
 	    });
@@ -3582,7 +3585,9 @@
 	        console.log(rsp);
 	        self._Customer.prototype$addCard({ id: self.user.id }, { card_token: rsp.id }).$promise.then(function (user) {
 	          console.log("Save card success");
-	          self.fetchCreditCard();
+	          self.fetchUserInfo().then(function () {
+	            self.fetchCreditCard();
+	          });
 	          self.editModal.hide();
 	        }, function (err) {
 	          console.log(err);

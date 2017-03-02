@@ -8,6 +8,7 @@ class CreditCardSelectItemController {
     this._$q = $q
     this._Omise = Omise
     this.cardIndex = 0
+    this.cards = []
     self.modal = $ionicModal.fromTemplate(creditCardSelectModal,{
       scope:$scope
     })
@@ -69,7 +70,9 @@ class CreditCardSelectItemController {
       console.log(rsp)
       self._Customer.prototype$addCard({id:self.user.id},{card_token:rsp.id}).$promise.then(function (user) {
         console.log("Save card success")
-        self.fetchCreditCard()
+        self.fetchUserInfo().then(function () {
+          self.fetchCreditCard()
+        })
         self.editModal.hide()
       }, function (err) {
         console.log(err)

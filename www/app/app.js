@@ -24,6 +24,7 @@ angular.module('starter', [
 ])
 
 .run(function($ionicPlatform,$ionicLoading,$rootScope,$state,$location,LoopBackAuth) {
+  //$locationProvider.html5Mode(true)
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -72,8 +73,9 @@ angular.module('starter', [
 })
   .config(($urlRouterProvider,LoopBackResourceProvider,$ionicConfigProvider,$httpProvider,$logProvider) => {
     "ngInject";
-// Use a custom auth header instead of the default 'Authorization'
-$logProvider.debugEnabled(false);
+    
+    // Use a custom auth header instead of the default 'Authorization'
+    $logProvider.debugEnabled(false);
     LoopBackResourceProvider.setAuthHeader('X-Access-Token');
 
     // Change the URL where to access the LoopBack REST API server
