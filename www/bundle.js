@@ -2838,7 +2838,7 @@
 /* 94 */
 /***/ function(module, exports) {
 
-	module.exports = "<shop-detail-header shop=\"$ctrl.shop\">\n\n</shop-detail-header>\n<product-list product-detail-state=\"sidemenu.home.shopProductDetail\" shop-id=\"$ctrl.shop.id\">\n\n</product-list>\n"
+	module.exports = "<shop-detail-header shop=\"$ctrl.shop\">\n\n</shop-detail-header>\n<ion-content scroll=\"false\" style=\"top:200px;\">\n  <product-list product-detail-state=\"sidemenu.home.shopProductDetail\" shop-id=\"$ctrl.shop.id\" style=\"height:300px;\"></product-list>\n</ion-content>\n"
 
 /***/ },
 /* 95 */
@@ -5246,7 +5246,7 @@
 /* 185 */
 /***/ function(module, exports) {
 
-	module.exports = "<ion-view view-title=\"ShopDetail\">\n  <ion-content>\n    <shop-detail shop=\"$ctrl.shop\"></shop-detail>\n  </ion-content>\n</ion-view>\n"
+	module.exports = "<ion-view view-title=\"ShopDetail\">\n  <ion-content scroll=\"false\">\n    <shop-detail shop=\"$ctrl.shop\"></shop-detail>\n  </ion-content>\n</ion-view>\n"
 
 /***/ },
 /* 186 */

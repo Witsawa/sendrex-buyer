@@ -1,6 +1,6 @@
 {
-  "name": "My Ionic App",
-  "short_name": "My Ionic App",
+  "name": "Sendrex Buyer",
+  "short_name": "Sendrex Buyer",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
