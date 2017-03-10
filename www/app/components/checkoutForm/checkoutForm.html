@@ -6,7 +6,15 @@
           Subtotal
         </div>
         <div class="col text-right">
-          {{$ctrl.data.price | currency}}
+          {{$ctrl.data.price | currency:$ctrl.currency}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Delivery fee
+        </div>
+        <div class="col  text-right">
+          {{$ctrl.data.deliveryFee | currency:$ctrl.currency}}
         </div>
       </div>
       <div class="row">
@@ -14,7 +22,7 @@
           Discount
         </div>
         <div class="col  text-right">
-          {{$ctrl.data.discount | currency}}
+          {{$ctrl.data.discount | currency:$ctrl.currency}}
         </div>
       </div>
       
@@ -25,7 +33,7 @@
           Total
         </div>
         <div class="col  text-right">
-          {{$ctrl.data.total | currency}}
+          {{$ctrl.data.total | currency:$ctrl.currency}}
         </div>
       </div>
     </ion-item>
@@ -35,6 +43,21 @@
   </div>
 </ion-content>
 
-<div class="bar bar-footer bar-positive">
-  <button class="button button-clear" style="width:100%;" ng-click="$ctrl.checkout()">Checkout</button>
+<div class="dark-bg light" style="height:auto;position:absolute;bottom:0px;width:100%;">
+  <div class="row">
+    <div class="col">
+      <p style="width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;">
+        Delivery to {{$ctrl.deliveryLocation.formatted_address}}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="button button-positive button-block no-margin" ng-click="$ctrl.checkout()">Check out - {{$ctrl.data.total | currency:$ctrl.currency}} </button>
+    </div>
+  </div>
+  
 </div>

@@ -17,6 +17,10 @@
     </a>
   </ion-tabs>
   <ion-content class="has-tabs-top">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="$ctrl.fetchOrders()">
+    </ion-refresher>
     <ion-list>
       <ion-item ng-repeat="order in filteredOrders = ($ctrl.orders | filter:{status:$ctrl.statusFilter})" ui-sref="sidemenu.orderDetail({id:order.id})">
         <div>

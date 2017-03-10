@@ -6,11 +6,14 @@ class CheckoutFormController {
     this.card = undefined
     this._$q = $q
     this._$state = $state
+    this.currency = "THB"
+    this.deliveryLocation = this._cartBuilder.getDeliveryLocation()
     this.fetchData()
   }
   fetchData() {
     let self = this
     let datas = this._cartBuilder.getAllCart()
+    console.log(datas)
     self._Order.getCartsInfo({carts:datas}).$promise.then((result)=>{
       this.data = result
     },(error)=>{

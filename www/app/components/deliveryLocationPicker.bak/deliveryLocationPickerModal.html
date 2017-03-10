@@ -1,0 +1,34 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-dark">
+    <button type="button" class="button button-clear" ng-click="$ctrl.done()">Done</button>
+    <h1 class="title">Destination</h1>
+    <button type="button" class="button button-clear" ng-click="$ctrl.edit()"><i class="ion-icon ion-android-add"></i></button>
+  </ion-header-bar>
+  <ion-content >
+    <div class="list list-inset" ng-if="$ctrl.currentLocation">
+      
+      <ion-radio ng-model="$ctrl.locationIndex" ng-value="-1">
+        <div>Current location</div>
+        <div>
+          {{$ctrl.currentLocation.formatted_address}}
+        </div>
+      </ion-radio>
+    </div>
+    <div class="list list-inset">
+      <div class="item item-divider">
+        Saved destination
+      </div>
+      <ion-radio ng-model="$ctrl.locationIndex" ng-value="$index" ng-repeat="location in $ctrl.user.delivery_locations" on-hold="$ctrl.showActions(location)"> 
+        
+        <div>{{location.name}}</div>
+        <div>
+          {{location.address.formatted_address}}
+        </div>
+      </ion-radio>
+    </div>
+
+
+
+  </ion-content>
+</ion-modal-view>
+

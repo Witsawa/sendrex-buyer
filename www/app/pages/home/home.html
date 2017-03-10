@@ -1,5 +1,5 @@
 <ion-view>
-  <ion-tabs class="tabs-striped tabs-color-positive">
+  <ion-tabs class="tabs-striped tabs-color-positive tabs-top">
 
     <ion-tab title="Shopping" href="{{$ctrl.getStateUrl('sidemenu.home.shopping')}}">
       <!-- Tab 1 content -->
@@ -16,4 +16,6 @@
       <ion-nav-view name="home-shops-content"></ion-nav-view>
     </ion-tab>
   </ion-tabs>
+  <delivery-location-picker class="bar bar-dark bar-footer"></delivery-location-picker>
+  
 </ion-view>

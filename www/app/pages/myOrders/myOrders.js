@@ -15,23 +15,6 @@ let myOrdersModule = angular.module('myOrders', [
             controller: myOrdersPage.controller,
             controllerAs:'$ctrl'
           }
-        },
-        resolve:{
-          getUser:['Customer',function(Customer){
-            return Customer.getCurrent().$promise
-          }],
-          getOrders:['getUser','Customer',function(getUser,Customer){
-            let user = getUser
-            return Customer.orders({id:user.id,filter:{
-              include:[
-                'shop',
-                {orderItems:[
-                  'product',
-                  'productValuePack'
-                ]}
-              ]
-            }}).$promise
-          }]
         }
 
       });

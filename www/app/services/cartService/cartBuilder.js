@@ -3,11 +3,12 @@
  */
 
 class cartBuilder{
-  constructor($localStorage,$rootScope,Product,ProductValuePack,$filter,Shop,Delivery) {
+  constructor($localStorage,$rootScope,Product,ProductValuePack,$filter,Shop,Delivery,Order,$q,$ionicPopup) {
     this.name = 'cartBuilder';
     this.item = {}
     this._localStorage = $localStorage.$default({
-      myCart:{}
+      myCart:{},
+      deliveryLocation:{}
     })
 
     this._$rootScope =$rootScope
@@ -16,6 +17,9 @@ class cartBuilder{
     this._$filter = $filter
     this._Shop = Shop
     this._Delivery = Delivery
+    this._Order = Order
+    this._$q = $q
+    this._$ionicPopup = $ionicPopup
     //{productId,variantId,optionId[],valuePackId,quantity,shopId,order_items[]}
   }
   _createProductItem(product){
@@ -43,7 +47,7 @@ class cartBuilder{
   addToCart(item) {
     let data = this.createPostDataFromItem(item)
     console.log(data)
-    this._localStorage.myCart[data.shopId] = this._localStorage.myCart[data.shopId] || {shopId:data.shopId,delivery_method:"Delivery",delivery_address:{geolocation:{lat:0,lng:0},formatted_address:' '},order_items:[]}
+    this._localStorage.myCart[data.shopId] = this._localStorage.myCart[data.shopId] || {shopId:data.shopId,delivery_method:"Delivery",delivery_address:this._localStorage.deliveryLocation,order_items:[]}
     this._localStorage.myCart[data.shopId].order_items.push(data)
   }
   count(){
@@ -176,108 +180,13 @@ class cartBuilder{
 
   getDetailedItems(){
     let self = this
-
-    let shopIds = Object.keys(this._localStorage.myCart)
-    let carts = []
-    /*if(shopIds.length>0){
-      this._$rootScope.$broadcast('loading:show')
-    }*/
-    shopIds.forEach((shopId)=>{
-      let cart = angular.copy(this._localStorage.myCart[shopId])
-      console.log(cart)
-      let items = cart.order_items
-      cart.totalPrice = 0
-      self._Shop.findById({id:shopId}).$promise.then((shop)=>{
-        cart.shop = shop
-      },(error)=>{
-        console.log("Error getting shop")
-      })
-
-      items.forEach((item)=>{
-        if(item.productValuePackId != null){//value pack item
-
-          self._ProductValuePack.findById({id:item.productValuePackId,
-            filter: {
-              include: [
-                'shop',
-                'promotions',
-                {
-                  products: [
-                    'productVariants',
-                    {productOptions: ['productOptionValues']}
-                  ]
-                }
-              ]
-            }
-          }).$promise.then((valuePack)=>{
-            item.productValuePack = valuePack
-            valuePack.products.forEach((product)=>{
-              //map product order item to detailed product from server
-              let productItem = self._$filter('filter')(item.order_items, {productId: product.id})[0]
-              let detailedProduct = self._mapProductItemToDetailedProduct(product,productItem)
-              angular.extend(productItem,detailedProduct)
-              productItem.unitDiscount = productItem.product.productVariants[0].price
-            })
-
-            //calculate item price
-
-            //value paack price + op
-            item.unitPrice = item.productValuePack.price + item.order_items.reduce((result,subitem)=>{
-                return result += subitem.unitPrice - subitem.unitDiscount
-              },0)
-
-            item.unitDiscount = item.productValuePack.promotions.reduce((result,promotion)=>{
-              return result += (item.unitPrice - result)*(promotion.discount_amount/100)
-            },0)
-            cart.totalPrice += (item.unitPrice-item.unitDiscount)*item.quantity
-
-          },()=>{
-            //TODO error get product value pack
-          })
-        }else{//product item
-          self._Product.findById({id:item.productId,filter:{
-            include:[
-              'shop',
-              'productVariants',
-              'promotions',
-              {productOptions:['productOptionValues']}
-            ]
-          }}).$promise.then((product)=>{
-            let detailedProduct = self._mapProductItemToDetailedProduct(product,item)
-            angular.extend(item,detailedProduct)
-            //calculate item price
-            item.unitDiscount = item.product.promotions.reduce((result,promotion)=>{
-              return result += (item.unitPrice - result)*(promotion.discount_amount/100)
-            },0)
-            cart.totalPrice += (item.unitPrice-item.unitDiscount)*item.quantity
-
-          })
-        }
-      })
-
-      //calculate shipping fee
-      this._Delivery.calculateDelivery({
-        from_address:cart.delivery_address.geolocation,
-        shop_id:shopId
-      }).$promise.then((deliveryInfo)=>{
-        console.log(deliveryInfo)
-        cart.delivery_fee = deliveryInfo.service_fee
-        cart.delivery_time = deliveryInfo.delivery_time = deliveryInfo.delivery_time_unit
-        cart.totalPrice += cart.delivery_fee
-      
-      },(err)=>{
-        console.log(err)
-        cart.delivery_fee = -1
-        cart.delivery_time = -1
-      })
-      
-      carts.push(cart)
+    let deferred = this._$q.defer();
+    this._Order.getCartsInfo({carts:this.getAllCart()}).$promise.then((result)=>{
+      deferred.resolve(result)
+    },(error)=>{
+      deferred.reject(new Error("Cannot create order (multiple)"))
     })
-
-
-
-
-    return carts
+    return deferred.promise
   }
   removeFromCart(shopId,index){
     /*item = this._$filter('filter')(this._localStorage.myCart[item.shopId].order_items, {$$hashkey: item.$$hashkey})[0]
@@ -289,7 +198,7 @@ class cartBuilder{
     }
   }
   getCart(shopId){
-    return this._localStorage.myCart[shopId]
+    return getAllCart()[shopId]
   }
   getAllCart(){
     return this._localStorage.myCart
@@ -302,15 +211,43 @@ class cartBuilder{
       this.clearCart(shopId)
     })
   }
-  setDeliveryAddress(shopId,address){
+  /* setDeliveryAddress(shopId,address){
     console.log("Set delivery address",address)
     this._localStorage.myCart[shopId].delivery_address = address
   }
+  setAllCartDeliveryAddress(address){
+    let self = this
+    Object.keys(this._localStorage.myCart).forEach(function (shopId) {
+      self.setDeliveryAddress(shopId,address)
+    })
+  }
   setDeliveryMethod(shopId,method){
     this._localStorage.myCart[shopId].delivery_method = method
+  }*/
+  setDeliveryLocation(address){
+    let self = this
+    var confirmPopup = this._$ionicPopup.confirm({
+      title: 'Change delivery location',
+      template: 'You will lost all item in the cart, Do you want to continue?'
+    });
+
+    return confirmPopup.then(function(res) {
+      if(res) {
+        console.log('You are sure');
+        self._localStorage.deliveryLocation = address
+        self._localStorage.myCart = {}
+      } else {
+        console.log('You are not sure');
+      }
+      return self._localStorage.deliveryLocation
+    });
+    
+  }
+  getDeliveryLocation(){
+    return this._localStorage.deliveryLocation
   }
 }
 
-cartBuilder.$inject = ['$localStorage','$rootScope','Product','ProductValuePack','$filter','Shop','Delivery']
+cartBuilder.$inject = ['$localStorage','$rootScope','Product','ProductValuePack','$filter','Shop','Delivery','Order','$q','$ionicPopup']
 
 export default cartBuilder;

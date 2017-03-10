@@ -12,37 +12,69 @@ class DeliveryLocationPickerController {
     self._$ionicActionSheet = $ionicActionSheet
     this._cartBuilder = cartBuilder
     this._Delivery = Delivery
-
-    this.deliveryLocation = this._cartBuilder.getDeliveryLocation()
     self.modal = $ionicModal.fromTemplate(DeliveryLocationPickerModal,{
       scope:$scope
     })
     self.locations = []
+    console.log(self)
+    $scope.$watch(function(){
+      return self.shopId
+    },function(newval){
+      if(newval){
+        let cart = self._cartBuilder.getCart(self.shopId)
+        console.log(cart)
+        self.currentDeliveryLocation = cart.delivery_address
+        self._Delivery.calculateDelivery({
+          from_address:cart.delivery_address.geolocation,
+          shop_id:cart.shopId
+        }).$promise.then((deliveryInfo)=>{
+          console.log(deliveryInfo)
+          self.estimated_fee = deliveryInfo.service_fee
+          self.estimated_time = deliveryInfo.delivery_time + ' '+deliveryInfo.delivery_time_unit
+        },(err)=>{
+          console.log(err)
+          self.estimated_fee = -1
+          self.estimated_time = -1
+        })
+        
+      }
+    })
     
     
     self.locationIndex = -1
 
     //Get current position
-    self.currentLocation = navigator.geolocation.getCurrentPosition((position)=>{
-      console.log(position)
-      let geolocation = {
-        lat:position.coords.latitude,
-        lng:position.coords.longitude
-      }
-      let formatted_address = ""
-      let currentLocation = {
-        geolocation,
-        formatted_address
-      }
-      var geocoder = new google.maps.Geocoder()
-      geocoder.geocode({'location':geolocation},function(results,status){
-        console.log(results)
-        if (status === 'OK') {
-          currentLocation.formatted_address = results[0].formatted_address
+    if (navigator.geolocation) {
+      console.log("Get current location")
+      navigator.geolocation.getCurrentPosition((position)=>{
+        console.log(position)
+        let geolocation = {
+          lat:position.coords.latitude,
+          lng:position.coords.longitude
         }
-      })
-      return currentLocation
-    })
+        let formatted_address = ""
+        self.currentLocation = {
+          geolocation,
+          formatted_address
+        }
+        var geocoder = new google.maps.Geocoder()
+        geocoder.geocode({'location':geolocation},function(results,status){
+          console.log(results)
+          if (status === 'OK') {
+            $timeout(()=>{
+              self.currentLocation.formatted_address = results[0].formatted_address
+            })
+          }
+
+        })
+        
+      },(err)=>{
+        console.log(err)
+        console.log("Cannot get current position")
+      });
+    } else {
+        console.log("Geolocation is not supported by this browser.")
+    }
 
   }
   fetchUserInfo(){
@@ -89,6 +121,7 @@ class DeliveryLocationPickerController {
     console.log(index)
     if(index != -1){
       self.user.delivery_locations[index] = self.editLocation
+      console.log(self.user.delivery_locations)
       
     }else{
       self.user.delivery_locations.push(self.editLocation)
@@ -125,12 +158,7 @@ class DeliveryLocationPickerController {
      address = self.user.delivery_locations[self.locationIndex].address
 
    }
-   this._cartBuilder.setDeliveryLocation(address).then(function (newAddress) {
-      self.deliveryLocation = newAddress
-   })
-   //this._cartBuilder.setAllCartDeliveryAddress(this.deliveryLocation)
-   self.modal.hide()
-   /*if(address){
+   if(address){
      var confirmPopup = self._$ionicPopup.confirm({
       title: 'Change destination',
       template: 'Apply changing destination to all carts?',
@@ -154,7 +182,7 @@ class DeliveryLocationPickerController {
     });
    }else{
      console.log("Please select location")
-   }*/
+   }
   }
   showActions(location){
     //show edit or delete

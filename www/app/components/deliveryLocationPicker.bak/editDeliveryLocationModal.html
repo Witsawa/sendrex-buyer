@@ -1,0 +1,20 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-dark">
+    <h1 class="title">Destination</h1>
+    <button type="button" class="button button-clear" ng-click="$ctrl.saveDeliveryLocation()">Save</button>
+
+  </ion-header-bar>
+  <ion-content >
+    <div class="list">
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Location name</span>
+        <input type="text" placeholder="Location name" ng-model="$ctrl.editLocation.name">
+      </label>
+      <location-picker ng-model="$ctrl.editLocation.address"></location-picker>
+    </div>
+
+
+
+  </ion-content>
+</ion-modal-view>
+

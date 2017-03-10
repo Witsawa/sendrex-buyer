@@ -1,0 +1,23 @@
+<div ng-click="$ctrl.openModal()">
+  <div class="row no-padding" >
+    <div class="col text-left no-padding">
+      <label>Delivery fee</label>
+
+    </div>
+    <div class="col text-right no-padding">
+      <label>{{$ctrl.estimated_fee!=-1?($ctrl.estimated_fee | currency):''}}</label>
+    </div>
+  </div>
+  <!--TODO open delivery location picker-->
+  <div class="row no-padding" ng-click="">
+    <div class="col no-padding">
+      <div class="positive text-wrap">{{$ctrl.currentDeliveryLocation.formatted_address}}
+        
+      </div>
+      <div>
+        <span ng-if="$ctrl.estimated_time != -1">{{$ctrl.estimated_time}}</span>
+        <span ng-if="$ctrl.estimated_time == -1" class="text-warning">This shop not delivery to this area</span>
+      </div>
+    </div>
+  </div>
+</div>
