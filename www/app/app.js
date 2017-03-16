@@ -22,7 +22,6 @@ angular.module('starter', [
   AngularFilter,
   Services
 ])
-
 .run(function($ionicPlatform,$ionicLoading,$rootScope,$state,$location,LoopBackAuth) {
   //$locationProvider.html5Mode(true)
   $ionicPlatform.ready(function() {
