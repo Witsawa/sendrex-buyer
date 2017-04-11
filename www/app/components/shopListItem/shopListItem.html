@@ -5,5 +5,13 @@
       {{$ctrl.shop.description}}
     </p>
   </div>
-  <button type="button" class="button button-positive shop-item-btn"><i class="icon ion-chatbubble"></i></button>
+  <div class="row">
+    <div class="col">
+      <follow-button shop="$ctrl.shop"></follow-button>
+    </div>
+    <div class="col">
+      <message-button shop="$ctrl.shop" class="shop-item-btn"></message-button>
+    </div>
+  </div>
+  
 </ion-item>

@@ -7,10 +7,10 @@
     <div>{{$ctrl.shop.location.formatted_address || "Unknown"}}</div>
     <div class="row">
       <div class="col">
-        <button class="button button-positive button-block button-small">Follow</button>
+        <follow-button shop="$ctrl.shop"></follow-button>
       </div>
       <div class="col">
-        <button class="button button-positive button-block button-small">Message</button>
+        <message-button shop="$ctrl.shop"></message-button>
       </div>
     </div>
   </div>

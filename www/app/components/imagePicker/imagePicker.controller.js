@@ -1,64 +1,78 @@
 class ImagePickerController {
-  constructor($cordovaCamera,$ionicPlatform,$ionicActionSheet) {
+  constructor($scope,Upload,apiRoot,$rootScope,ionicToast,$timeout) {
     this.name = 'imagePicker';
-    this._$cordovaCamera = $cordovaCamera
-    this._$ionicPlatform = $ionicPlatform
-    this._$ionicActionSheet = $ionicActionSheet
+    this._$scope = $scope
+    this._Upload =Upload
+    this.apiRoot = apiRoot
+    this._$rootScope = $rootScope
+    this._ionicToast = ionicToast
+    this._$timeout = $timeout
+    console.log($scope.$id)
   }
-  showAction(){
+  openFilePicker($event){
+    $event.stopImmediatePropagation();
+    
+    console.log($event)
+    let fileInput = document.getElementById("imagePickerFileInput-"+this._$scope.$id)
+    
+    console.log(fileInput)
+    this._$timeout(function(){
+      fileInput.click()
+    })
+    return false
+    
+  }
+  upload(files){
+    this._$rootScope.$broadcast("loading:show")
     let self = this
-    var hideSheet = this._$ionicActionSheet.show({
-      buttons: [
-        { text: 'Camera' },
-        { text: 'Gallery' }
-      ],
-      titleText: 'Pick image',
-      cancelText: 'Cancel',
-      cancel: function() {
-        // add cancel code..
-      },
-      buttonClicked: function(index) {
-        let mode = Camera.PictureSourceType.CAMERA
-        switch(index){
-          case 0:
-            mode = Camera.PictureSourceType.CAMERA
-            break;
-          case 1:
-            mode = Camera.PictureSourceType.PHOTOLIBRARY
+    let file = files[0]
+    if(self.ngModel!=undefined && self.ngModel!=""){//if existing image -> replace image
+      let filename = self.ngModel.substring(self.ngModel.lastIndexOf('/')+1);
+      filename = filename.replace(/_ts\d*/,"_ts"+new Date().getTime())
+      file = this._Upload.rename(file, filename)
+    }else if(self.fileName!=undefined) {
+      file = this._Upload.rename(file, self.fileName+"_ts"+new Date().getTime())
+    }
+    let url = this.apiRoot
+    let options = {
+      width:1000,
+      height:1000,
+      resizeIf:function(width,height){return width > 1000 || height > 1000}
+    }
+    
+    this._Upload.resize(file, options).then(function(resizedFile){
+      self._Upload.applyExifRotation(resizedFile).then(function(fixedOrientationFile){
+        self._Upload.upload({
+          url: url + '/Containers/witsawa-sendrex/upload',
+          data: {file: fixedOrientationFile}
+        }).then(function (resp) {
+          if(self.ngModel!=undefined) {
+            self.ngModel = resp.data.result.files.file[0].providerResponse.location
+          }
+          
+          self.onImageSelected({url:resp.data.result.files.file[0].providerResponse.location})
+          self._ionicToast.show("Image uploaded", "bottom", false, 2500)
+        }, function (resp) {
+          console.log('Error status: ' + resp.status);
+          self._ionicToast.show("Cannot upload image", "bottom", false, 2500)
+        }, function (evt) {
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        }).finally(()=> {
+          self._$rootScope.$broadcast("loading:hide")
+          if (self._$scope.$root.$$phase != '$apply' && self._$scope.$root.$$phase != '$digest') {
+            self._$scope.$apply();
+          }
+        })
 
-        }
-        self.getPicture(mode)
-        return true;
-      }
+      })
+      
     });
 
-  }
-  getPicture(mode){
-    let self =this
-    self._$ionicPlatform.ready(function() {
-      var options = {
-        quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL,
-        sourceType: mode,
-        allowEdit: true,
-        encodingType: Camera.EncodingType.JPEG,
-        targetWidth: 100,
-        targetHeight: 100,
-        popoverOptions: CameraPopoverOptions,
-        saveToPhotoAlbum: false,
-        correctOrientation:true
-      };
 
-      self._$cordovaCamera.getPicture(options).then(function(imageData) {
-
-        self.ngModel = "data:image/jpeg;base64," + imageData;
-      }, function(err) {
-        // error
-      });
-    });
   }
 }
 
-ImagePickerController.$inject = ['$cordovaCamera','$ionicPlatform','$ionicActionSheet']
+ImagePickerController.$inject = ["$scope",'Upload',"apiRoot",'$rootScope','ionicToast','$timeout']
 
 export default ImagePickerController;

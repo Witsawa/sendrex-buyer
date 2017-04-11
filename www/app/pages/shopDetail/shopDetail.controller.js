@@ -1,10 +1,12 @@
 class ShopDetailController {
-  constructor(getShop) {
+  constructor(getShop,$ionicHistory,$scope) {
     this.name = 'shopDetail';
     this.shop = getShop
   }
+  
+
 }
 
-ShopDetailController.$inject = ['getShop']
+ShopDetailController.$inject = ['getShop','$ionicHistory','$scope']
 
 export default ShopDetailController;

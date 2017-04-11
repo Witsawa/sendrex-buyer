@@ -14,8 +14,7 @@ let homeModule = angular.module('home', [
             controller: homePage.controller,
             controllerAs:'$ctrl'
           }
-        },
-        abstract:true
+        }
 
 
       });

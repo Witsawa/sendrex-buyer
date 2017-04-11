@@ -1,0 +1,7 @@
+<div class="list">
+  <div class="item item-avatar" ng-repeat="conversation in $ctrl.conversations" ui-sref="^.chat({id:conversation.id})">
+    <img ng-src="{{conversation.shop.image}}">
+    <h2>{{conversation.shop.name}}</h2>
+    <p>{{conversation.conversationItems[0].message}}</p>
+  </div>
+</div>

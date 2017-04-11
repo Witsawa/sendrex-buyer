@@ -11,6 +11,7 @@ class SidemenuController {
   goBack()
   {
     console.log('go back')
+    console.log(this._$ionicHistory.backView())
     this._$ionicHistory.goBack();                           //This doesn't work
     //window.history.back();                          //This works
     //alert('code to go back called. Did it work?');  //For testing

@@ -5,8 +5,12 @@ import './imagePicker.scss';
 let imagePickerComponent = {
   restrict: 'E',
   bindings: {
-    ngModel:'='
+    ngModel:"=",
+    fileName:"@",
+    onImageSelected:"&",
+    disableFallback:'<'
   },
+  transclude:true,
   template,
   controller
 };

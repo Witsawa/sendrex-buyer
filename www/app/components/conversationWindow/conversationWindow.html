@@ -1,0 +1,15 @@
+<div class="conversation-container" follow-tail="$ctrl.isFollow" follow-data="$ctrl.conversationItems">
+  <div class="conversation-item" ng-repeat="item in $ctrl.conversationItems" ng-class="{'me':item.customerId}">
+    <div class="row">
+      <div class="avatar" ng-if="item.shopId">
+        <img src="http://placehold.it/40x40">
+      </div>
+      <div class="col message-container">
+        <div class="message">{{item.message}}</div>
+      </div>
+      <div class="avatar" ng-if="item.customerId">
+         <img src="http://placehold.it/40x40">
+      </div>
+    </div>
+  </div>
+</div>

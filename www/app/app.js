@@ -6,7 +6,7 @@ import AppComponent from './app.component';
 import Directives from './directives';
 import AngularFilter from 'angular-filter';
 import Services from './services/services';
-
+import ngFileUpload from 'ng-file-upload';
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -20,7 +20,10 @@ angular.module('starter', [
   Pages,
   Directives,
   AngularFilter,
-  Services
+  Services,
+  'monospaced.elastic',
+  ngFileUpload,
+  'ionic-toast'
 ])
 .run(function($ionicPlatform,$ionicLoading,$rootScope,$state,$location,LoopBackAuth) {
   //$locationProvider.html5Mode(true)
@@ -70,9 +73,10 @@ angular.module('starter', [
     });
   });
 })
-  .config(($urlRouterProvider,LoopBackResourceProvider,$ionicConfigProvider,$httpProvider,$logProvider) => {
+  .config(($urlRouterProvider,LoopBackResourceProvider,$ionicConfigProvider,$httpProvider,$logProvider,$provide) => {
     "ngInject";
-    
+
+    $provide.value("apiRoot", LoopBackResourceProvider.getUrlBase());
     // Use a custom auth header instead of the default 'Authorization'
     $logProvider.debugEnabled(false);
     LoopBackResourceProvider.setAuthHeader('X-Access-Token');

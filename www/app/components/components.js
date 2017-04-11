@@ -20,6 +20,11 @@ import ShopDetailHeader from './shopDetailHeader/shopDetailHeader'
 import DeliveryLocationPicker from './deliveryLocationPicker/deliveryLocationPicker'
 import CheckoutForm from './checkoutForm/checkoutForm'
 import CreditCardSelectItem from './creditCardSelectItem/creditCardSelectItem'
+import FollowButton from './followButton/followButton'
+import MessageButton from './messageButton/messageButton'
+import ChatRoom from './chatRoom/chatRoom'
+import ChatList from './chatList/chatList'
+import MultiImagePicker from './multiImagePicker/multiImagePicker'
 let componentModule = angular.module('app.components', [
   ProductList,
   ProductListItem,
@@ -42,7 +47,12 @@ let componentModule = angular.module('app.components', [
   ShopDetailHeader,
   DeliveryLocationPicker,
   CheckoutForm,
-  CreditCardSelectItem
+  CreditCardSelectItem,
+  FollowButton,
+  MessageButton,
+  ChatRoom,
+  MultiImagePicker,
+  ChatList
 ])
 
 .name;

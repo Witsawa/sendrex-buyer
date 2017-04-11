@@ -1,7 +1,7 @@
 <ion-view>
   <ion-tabs class="tabs-striped tabs-color-positive tabs-top">
 
-    <ion-tab title="Shopping" href="{{$ctrl.getStateUrl('sidemenu.home.shopping')}}">
+    <ion-tab title="Shopping" href="{{$ctrl.getStateUrl('sidemenu.home.shopping')}}" on-deselect="$ctrl.clearHistory()">
       <!-- Tab 1 content -->
       <ion-nav-view name="home-shopping-content"></ion-nav-view>
 
@@ -11,11 +11,10 @@
       <ion-nav-view name="home-services-content"></ion-nav-view>
     </ion-tab>-->
 
-    <ion-tab title="Shops" href="{{$ctrl.getStateUrl('sidemenu.home.shops')}}" >
+    <ion-tab title="Shops" href="{{$ctrl.getStateUrl('sidemenu.home.shops')}}" on-deselect="$ctrl.clearHistory()">
       <!-- Tab 3 content -->
       <ion-nav-view name="home-shops-content"></ion-nav-view>
     </ion-tab>
   </ion-tabs>
-  <delivery-location-picker class="bar bar-dark bar-footer"></delivery-location-picker>
   
 </ion-view>

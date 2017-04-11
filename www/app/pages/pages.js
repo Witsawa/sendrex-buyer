@@ -14,6 +14,8 @@ import ShopDetail from './shopDetail/shopDetail'
 import Register from './register/register'
 import Logout from './logout/logout'
 import Checkout from './checkout/checkout'
+import Chat from './chat/chat'
+import ChatList from './chatList/chatList'
 let pageModule = angular.module('app.pages', [
   Sidemenu,
   Login,
@@ -30,8 +32,11 @@ let pageModule = angular.module('app.pages', [
   ShopDetail,
   Register,
   Logout,
-  Checkout
+  Checkout,
+  Chat,
+  ChatList
 ])
+
 
 .name;
 

@@ -22,8 +22,15 @@
         Delivery by <a ui-sref="sidemenu.home.shopDetail({id:$ctrl.product.shop.id})">{{$ctrl.product.shop.name}}</a>
       </div>
       <div class="product-body-seperate text-right" style="width: 40%;">
-        <button class="button button-positive button-small">Follow</button>
-        <button class="button button-positive button-small">Message</button>
+        <div class="row" ng-if="$ctrl.product">
+          <div class="col">
+            <follow-button shop="$ctrl.product.shop"></follow-button>
+          </div>
+          <div class="col">
+              <message-button shop="$ctrl.product.shop"></message-button>
+          </div>
+          </div>
+        </div>
       </div>
     </div>
     

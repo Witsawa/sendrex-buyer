@@ -9914,14 +9914,15 @@ my-profile-form .profile-image {
 image-picker {
   position: relative;
   display: inline-block;
-  overflow: hidden; }
-  image-picker .image-container {
+  vertical-align: top; }
+  image-picker .preview-image {
     width: 100%;
-    height: 0px;
-    padding-bottom: 100%;
+    height: 100%;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat; }
+  image-picker.circle .preview-image {
+    border-radius: 50%; }
 shop-detail-header .shop-image {
   margin: 5px;
   width: 90px;
@@ -9935,6 +9936,70 @@ delivery-location-picker {
   width: 100%;
   position: absolute;
   z-index: 10; }
+chat-room {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column; }
+  chat-room conversation-window {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto; }
+conversation-window .conversation-container {
+  overflow-y: auto;
+  height: 100%; }
+.conversation-item .avatar {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  position: relative; }
+  .conversation-item .avatar img:first-child {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    max-width: 40px;
+    max-height: 40px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; }
+
+.conversation-item .message {
+  display: inline-block;
+  background-color: lightgray;
+  white-space: pre-wrap;
+  padding: 10px;
+  border-radius: 5px; }
+
+.conversation-item .products-container {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap; }
+  .conversation-item .products-container .product {
+    display: inline-block;
+    vertical-align: top; }
+    .conversation-item .products-container .product .item-image {
+      height: 240px;
+      width: 320px;
+      position: relative;
+      overflow: hidden; }
+      .conversation-item .products-container .product .item-image img {
+        width: 100%; }
+
+.conversation-item.me .message-container {
+  text-align: right; }
+typing-area .item-input-wrapper {
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%; }
+  typing-area .item-input-wrapper textarea {
+    width: 100%; }
 .login-form {
   margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.9); }
