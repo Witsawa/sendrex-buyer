@@ -9930,7 +9930,8 @@ shop-detail-header .shop-image {
   padding-bottom: 90px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover; }
+  background-size: cover;
+  border-radius: 50%; }
 delivery-location-picker {
   bottom: 0px;
   width: 100%;
