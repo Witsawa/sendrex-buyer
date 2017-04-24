@@ -10,7 +10,7 @@
         </div>
         <div>
           <div class="products-container">
-            <div class="list card product" ng-repeat="product in $ctrl.item.products" ui-sref="sidemenu.home.productDetail({id:product.id})">
+            <div class="list card product" ng-repeat="product in $ctrl.item.products" ui-sref="sidemenu.productDetail({id:product.id})">
                 <div class="item item-image" ng-if="product.images.length>=0">
                   <img class="" ng-src="{{product.images[0]}}">
                 </div>
