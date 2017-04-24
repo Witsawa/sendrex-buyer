@@ -1383,7 +1383,7 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"list card no-margin\" ui-sref=\"sidemenu.shopDetail({id:$ctrl.shop.id})\" style=\"position:relative;\">\n  <div class=\"item item-image\" style=\"position:relative;\">\n    <img ng-src=\"{{$ctrl.shop.cover}}\">\n  </div>\n  <div class=\"item item-thumbnail-left item-button-right item-borderless\" style=\"position:absolute;width:100%;bottom:0px;background-color:rgba(0,0,0,0.3)\">\n    <div class=\"item-image shop-image\" style=\"background-image:url({{$ctrl.shop.image}}),url(http://placehold.it/200x200);\"></div>\n    <h2 style=\"color:white;\" >{{$ctrl.shop.name}}</h2>\n    <p style=\"color:white;\">{{$ctrl.shop.description}}</p>\n    <div class=\"buttons\">\n      <message-button shop=\"$ctrl.shop\"></message-button>\n    </div>\n  </div>\n</div>"
+	module.exports = "<div class=\"list card no-margin\" ui-sref=\"sidemenu.shopDetail({id:$ctrl.shop.id})\" style=\"position:relative;\">\n  <div class=\"item item-image\" style=\"background-image:url({{$ctrl.shop.image}});height:200px;background-size:cover;background-position:center center;\">\n  </div>\n  <div class=\"item item-thumbnail-left item-button-right item-borderless\" style=\"position:absolute;width:100%;bottom:0px;background-color:rgba(0,0,0,0.3)\">\n    <div class=\"item-image shop-image\" style=\"background-image:url({{$ctrl.shop.image}}),url(http://placehold.it/200x200);\"></div>\n    <h2 style=\"color:white;\" >{{$ctrl.shop.name}}</h2>\n    <p style=\"color:white;\">{{$ctrl.shop.description}}</p>\n    <div class=\"buttons\">\n      <message-button shop=\"$ctrl.shop\"></message-button>\n    </div>\n  </div>\n</div>"
 
 /***/ },
 /* 39 */

@@ -1,6 +1,5 @@
 <div class="list card no-margin" ui-sref="sidemenu.shopDetail({id:$ctrl.shop.id})" style="position:relative;">
-  <div class="item item-image" style="position:relative;">
-    <img ng-src="{{$ctrl.shop.cover}}">
+  <div class="item item-image" style="background-image:url({{$ctrl.shop.cover}});height:200px;background-size:cover;background-position:center center;">
   </div>
   <div class="item item-thumbnail-left item-button-right item-borderless" style="position:absolute;width:100%;bottom:0px;background-color:rgba(0,0,0,0.3)">
     <div class="item-image shop-image" style="background-image:url({{$ctrl.shop.image}}),url(http://placehold.it/200x200);"></div>
