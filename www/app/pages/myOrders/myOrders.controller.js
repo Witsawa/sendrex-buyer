@@ -1,8 +1,8 @@
 class MyOrdersController {
-  constructor(getCurrentUser,Customer,$scope) {
+  constructor(Customer,$scope) {
     this.name = 'myOrders'
     this.statusFilter = 'pending'
-    this.user = getCurrentUser
+    this.userId = Customer.getCurrentId()
     this._Customer = Customer
     this._$scope = $scope
     this.orders = []
@@ -14,7 +14,7 @@ class MyOrdersController {
   }
   fetchOrders(){
     let self = this
-    this._Customer.orders({id:this.user.id,filter:{
+    this._Customer.orders({id:this.userId,filter:{
       include:[
         'shop',
         {orderItems:[
@@ -32,6 +32,6 @@ class MyOrdersController {
   }
 }
 
-MyOrdersController.$inject = ['getCurrentUser','Customer','$scope']
+MyOrdersController.$inject = ['Customer','$scope']
 
 export default MyOrdersController;

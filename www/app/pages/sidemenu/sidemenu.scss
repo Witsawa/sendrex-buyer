@@ -1,3 +1,6 @@
-sidemenu{
-
+@import "./../../../../scss/variables.scss";
+.mysidebar .item, .mysidebar .item .item-content, .mysidebar{
+  background-color: $dark;
+  color: $light;
+  
 }

@@ -1,20 +1,21 @@
-<ion-view>
-  <ion-tabs class="tabs-striped tabs-color-positive tabs-top">
+<ion-view view-title="Shops">
+  <!--​<ion-tabs class="tabs-striped tabs-color-positive tabs-top">
 
     <ion-tab title="Shopping" href="{{$ctrl.getStateUrl('sidemenu.home.shopping')}}" on-deselect="$ctrl.clearHistory()">
-      <!-- Tab 1 content -->
       <ion-nav-view name="home-shopping-content"></ion-nav-view>
 
     </ion-tab>
 
-    <!--<ion-tab title="Services"  href="{{$ctrl.getStateUrl('sidemenu.home.services')}}">
-      <ion-nav-view name="home-services-content"></ion-nav-view>
-    </ion-tab>-->
-
     <ion-tab title="Shops" href="{{$ctrl.getStateUrl('sidemenu.home.shops')}}" on-deselect="$ctrl.clearHistory()">
-      <!-- Tab 3 content -->
       <ion-nav-view name="home-shops-content"></ion-nav-view>
     </ion-tab>
-  </ion-tabs>
+  </ion-tabs>-->
+  <ion-content scroll="false" class="has-footer">
+    <shop-list></shop-list>
+  </ion-content>
+  <div class="bar bar-footer bar-dark">
+    <delivery-location-picker></delivery-location-picker>
+  </div>
   
 </ion-view>
+

@@ -5,8 +5,6 @@ import './deliveryLocationPicker.scss';
 let deliveryLocationPickerComponent = {
   restrict: 'E',
   bindings: {
-    shopId:'=',
-    addressChange:'&'
   },
   template,
   controller

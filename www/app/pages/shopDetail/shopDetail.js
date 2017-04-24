@@ -14,10 +14,10 @@ let shopDetailModule = angular.module('shopDetailPage', [
   .config(($stateProvider) => {
     "ngInject";
     $stateProvider
-      .state('sidemenu.home.shopDetail', {
+      .state('sidemenu.shopDetail', {
         url: '/shopDetail/:id',
         views: {
-          'home-shops-content': {
+          'sidemenu-content': {
             template: shopDetailPage.template,
             controller: shopDetailPage.controller,
             controllerAs: '$ctrl'

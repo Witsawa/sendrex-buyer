@@ -12,33 +12,33 @@
 
       <ion-nav-view name="sidemenu-content"></ion-nav-view>
     </ion-side-menu-content>
-    <ion-side-menu side="right">
-      <ion-list>
-        <ion-item ui-sref="sidemenu.dashboard" menu-close>
-          Dashboard
-        </ion-item>
-        <ion-item ui-sref="sidemenu.home.shopping" menu-close>
+    <ion-side-menu side="right" class="mysidebar padding">
+      <ion-list class="">
+        <ion-item class="item-borderless" ui-sref="sidemenu.home" menu-close>
           Home
         </ion-item>
-        <ion-item ui-sref="sidemenu.myProfile" menu-close>
+        <ion-item class="item-borderless" ui-sref="sidemenu.myProfile" menu-close ng-if="$ctrl.isAuthenticated">
           My profile
         </ion-item>
-        <ion-item ui-sref="sidemenu.chatList" menu-close>
+        <ion-item class="item-borderless" ui-sref="sidemenu.chatList" menu-close ng-if="$ctrl.isAuthenticated">
           Chat
         </ion-item>
-        <ion-item class="item-icon-right" ui-sref="sidemenu.myShoppingCart" menu-close>
+        <ion-item class="item-icon-right item-borderless" ui-sref="sidemenu.myShoppingCart" menu-close>
           My shopping cart
           <span class="badge badge-positive">{{$ctrl.myCartCount()}}</span>
         </ion-item>
-        <ion-item class="item-icon-right" ui-sref="sidemenu.myWishlist" menu-close>
+        <ion-item class="item-icon-right item-borderless" ui-sref="sidemenu.myWishlist" menu-close>
           My wishlist
           <span class="badge badge-positive">{{$ctrl.wishListCount()}}</span>
         </ion-item>
-        <ion-item ui-sref="sidemenu.myOrders" menu-close>
+        <ion-item class="item-borderless" ui-sref="sidemenu.myOrders" menu-close ng-if="$ctrl.isAuthenticated">
           My orders
         </ion-item>
-        <ion-item ui-sref="logout" menu-close>
+        <ion-item class="item-borderless" ui-sref="logout" menu-close ng-if="$ctrl.isAuthenticated">
           Logout
+        </ion-item>
+        <ion-item class="item-borderless" ui-sref="login" menu-close ng-if="!$ctrl.isAuthenticated">
+          Login
         </ion-item>
       </ion-list>
     </ion-side-menu>

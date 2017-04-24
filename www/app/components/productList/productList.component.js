@@ -8,6 +8,7 @@ let productListComponent = {
     productDetailState:'@',
     shopId:'<'
   },
+  transclude: true,
   template,
   controller
 };

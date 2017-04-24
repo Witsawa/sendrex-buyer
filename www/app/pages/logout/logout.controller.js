@@ -8,7 +8,7 @@ class LogoutController {
         LoopBackAuth.clearUser();
         LoopBackAuth.clearStorage();
         console.log("Logged out")
-        $state.go('login')
+        $state.go('sidemenu.home')
       },function(response){
         console.log("Log out failed")
         console.log(response)

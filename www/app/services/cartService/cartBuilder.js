@@ -224,23 +224,29 @@ class cartBuilder{
   setDeliveryMethod(shopId,method){
     this._localStorage.myCart[shopId].delivery_method = method
   }*/
-  setDeliveryLocation(address){
+  setDeliveryLocation(address, skipPrompt){
     let self = this
-    var confirmPopup = this._$ionicPopup.confirm({
-      title: 'Change delivery location',
-      template: 'You will lost all item in the cart, Do you want to continue?'
-    });
-
-    return confirmPopup.then(function(res) {
-      if(res) {
-        console.log('You are sure');
-        self._localStorage.deliveryLocation = address
-        self._localStorage.myCart = {}
-      } else {
-        console.log('You are not sure');
-      }
-      return self._localStorage.deliveryLocation
-    });
+    console.log('set delivery location')
+    if(!skipPrompt){
+      var confirmPopup = this._$ionicPopup.confirm({
+        title: 'Change delivery location',
+        template: 'You will lost all item in the cart, Do you want to continue?'
+      });
+      return confirmPopup.then(function(res) {
+        if(res) {
+          console.log('You are sure');
+          self._localStorage.deliveryLocation = address
+          self._localStorage.myCart = {}
+        } else {
+          console.log('You are not sure');
+        }
+        return self._localStorage.deliveryLocation
+      });
+    }else{
+      self._localStorage.deliveryLocation = address
+      self._localStorage.myCart = {}
+      return Promise.resolve(self._localStorage.deliveryLocation)
+    }
     
   }
   getDeliveryLocation(){

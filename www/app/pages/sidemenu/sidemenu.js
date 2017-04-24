@@ -17,12 +17,7 @@ let sidemenuModule = angular.module('sidemenu', [
           }
         },
         resolve:{
-          getCurrentUser:['Customer',(Customer)=>{
-              return Customer.getCurrent().$promise
-          }],
         }
-
-
       });
   })
 

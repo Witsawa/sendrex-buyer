@@ -1,5 +1,5 @@
 class SidemenuController {
-  constructor($ionicHistory,$ionicSideMenuDelegate,$localStorage,cartBuilder) {
+  constructor($ionicHistory,$ionicSideMenuDelegate,$localStorage,cartBuilder,Customer) {
     this.name = 'sidemenu';
     this._$ionicHistory = $ionicHistory
     this._$ionicSideMenuDelegate = $ionicSideMenuDelegate
@@ -7,6 +7,7 @@ class SidemenuController {
       wishList:[]
     })
     this._CartBuilder = cartBuilder
+    this.isAuthenticated = Customer.isAuthenticated()
   }
   goBack()
   {
@@ -26,6 +27,6 @@ class SidemenuController {
     return this._CartBuilder.count()
   }
 }
-SidemenuController.$inject = ['$ionicHistory','$ionicSideMenuDelegate','$localStorage','cartBuilder']
+SidemenuController.$inject = ['$ionicHistory','$ionicSideMenuDelegate','$localStorage','cartBuilder','Customer']
 
 export default SidemenuController;

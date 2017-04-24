@@ -4,8 +4,9 @@
     on-refresh="$ctrl.refresh()">
   </ion-refresher>
   <ion-list>
+    <ng-transclude></ng-transclude>
     <form>
-      <ion-item class="item-input-inset">
+      <ion-item class="item-input-inset item-borderless dark-bg">
         <label class="item-input-wrapper">
           <input type="search" placeholder="Search product" ng-model="query">
         </label>

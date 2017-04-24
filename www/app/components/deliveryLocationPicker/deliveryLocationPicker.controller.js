@@ -23,26 +23,34 @@ class DeliveryLocationPickerController {
     self.locationIndex = -1
 
     //Get current position
-    self.currentLocation = navigator.geolocation.getCurrentPosition((position)=>{
+    console.log('getting current position')
+    navigator.geolocation.getCurrentPosition((position)=>{
       console.log(position)
       let geolocation = {
         lat:position.coords.latitude,
         lng:position.coords.longitude
       }
-      let formatted_address = ""
-      let currentLocation = {
-        geolocation,
-        formatted_address
-      }
       var geocoder = new google.maps.Geocoder()
       geocoder.geocode({'location':geolocation},function(results,status){
         console.log(results)
         if (status === 'OK') {
-          currentLocation.formatted_address = results[0].formatted_address
+          self.currentLocation = {
+            geolocation,
+            formatted_address: results[0].formatted_address
+          }
+          if(!self.deliveryLocation.geolocation){
+            self._cartBuilder.setDeliveryLocation(self.currentLocation,true).then(function (newAddress) {
+              console.log(newAddress)
+              $timeout(()=>{
+                self.deliveryLocation = newAddress
+              })
+            })
+          }
         }
       })
-      return currentLocation
-    })
+    }, (err)=>{
+      console.log(err)
+    },{timeout: 30000, enableHighAccuracy: true, maximumAge: 75000})
 
   }
   fetchUserInfo(){
@@ -53,7 +61,9 @@ class DeliveryLocationPickerController {
   openModal(){
     let self = this
     console.log('Open modal')
-    self.fetchUserInfo()
+    if(self._Customer.isAuthenticated()){
+      self.fetchUserInfo()
+    }
     this.modal.show()
   }
   edit(location){

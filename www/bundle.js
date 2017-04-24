@@ -339,6 +339,7 @@
 	    productDetailState: '@',
 	    shopId: '<'
 	  },
+	  transclude: true,
 	  template: _productList2.default,
 	  controller: _productList4.default
 	};
@@ -349,7 +350,7 @@
 /* 5 */
 /***/ function(module, exports) {
 
-	module.exports = "<ion-content>\n  <ion-refresher\n    pulling-text=\"Pull to refresh...\"\n    on-refresh=\"$ctrl.refresh()\">\n  </ion-refresher>\n  <ion-list>\n    <form>\n      <ion-item class=\"item-input-inset\">\n        <label class=\"item-input-wrapper\">\n          <input type=\"search\" placeholder=\"Search product\" ng-model=\"query\">\n        </label>\n        <button type=\"submit\" class=\"button button-clear button-stable\" ng-click=\"$ctrl.search(query)\"><i class=\"icon ion-search\"></i></button>\n      </ion-item>\n    </form>\n    <item-select-modal item-class=\"item-divider\" ng-model=\"$ctrl.category\" on-select=\"$ctrl.filterChange(value)\" options=\"$ctrl.categories\" text-key=\"name\" value-key=\"id\" title=\"Select category\" default-text=\"All category\">\n      <label class=\"h4\">Filter: </label>\n    </item-select-modal>\n    <div class=\"row responsive-sm\">\n      <product-list-item ng-repeat=\"product in $ctrl.products\" class=\"col col-50\" product=\"product\" ng-click=\"$ctrl.viewProduct(product.id)\">\n      </product-list-item>\n    </div>\n\n  </ion-list>\n  <ion-infinite-scroll\n    on-infinite=\"$ctrl.loadMore()\"\n    distance=\"1%\"\n    ng-if=\"$ctrl.showLoadmore\"\n  >\n  </ion-infinite-scroll>\n</ion-content>\n"
+	module.exports = "<ion-content>\n  <ion-refresher\n    pulling-text=\"Pull to refresh...\"\n    on-refresh=\"$ctrl.refresh()\">\n  </ion-refresher>\n  <ion-list>\n    <ng-transclude></ng-transclude>\n    <form>\n      <ion-item class=\"item-input-inset item-borderless dark-bg\">\n        <label class=\"item-input-wrapper\">\n          <input type=\"search\" placeholder=\"Search product\" ng-model=\"query\">\n        </label>\n        <button type=\"submit\" class=\"button button-clear button-stable\" ng-click=\"$ctrl.search(query)\"><i class=\"icon ion-search\"></i></button>\n      </ion-item>\n    </form>\n    <item-select-modal item-class=\"item-divider\" ng-model=\"$ctrl.category\" on-select=\"$ctrl.filterChange(value)\" options=\"$ctrl.categories\" text-key=\"name\" value-key=\"id\" title=\"Select category\" default-text=\"All category\">\n      <label class=\"h4\">Filter: </label>\n    </item-select-modal>\n    <div class=\"row responsive-sm\">\n      <product-list-item ng-repeat=\"product in $ctrl.products\" class=\"col col-50\" product=\"product\" ng-click=\"$ctrl.viewProduct(product.id)\">\n      </product-list-item>\n    </div>\n\n  </ion-list>\n  <ion-infinite-scroll\n    on-infinite=\"$ctrl.loadMore()\"\n    distance=\"1%\"\n    ng-if=\"$ctrl.showLoadmore\"\n  >\n  </ion-infinite-scroll>\n</ion-content>\n"
 
 /***/ },
 /* 6 */
@@ -1191,7 +1192,7 @@
 /* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "<ion-content>\n  <ion-refresher\n    pulling-text=\"Pull to refresh...\"\n    on-refresh=\"$ctrl.refresh()\">\n  </ion-refresher>\n<ion-list>\n\n  <form>\n    <ion-item class=\"item-input-inset\">\n      <label class=\"item-input-wrapper\">\n        <input type=\"search\" placeholder=\"Search shop\" ng-model=\"query\">\n      </label>\n      <button type=\"button\" class=\"button button-clear button-stable\" ng-click=\"$ctrl.search(query)\"><i class=\"icon ion-search\"></i></button>\n    </ion-item>\n  </form>\n  <item-select-modal item-class=\"item-divider\" ng-model=\"$ctrl.category\" on-select=\"$ctrl.filterChange(value)\" options=\"$ctrl.categories\" text-key=\"name\" value-key=\"id\" title=\"Select category\" default-text=\"All category\">\n    <label class=\"h4\">Filter: </label>\n  </item-select-modal>\n  <shop-list-item ng-repeat=\"shop in $ctrl.shops\" shop=\"shop\">\n  </shop-list-item>\n\n</ion-list>\n  <ion-infinite-scroll\n    on-infinite=\"$ctrl.loadMore()\"\n    distance=\"1%\"\n    ng-if=\"$ctrl.showLoadmore\"\n  >\n  </ion-infinite-scroll>\n</ion-content>\n"
+	module.exports = "<ion-content>\n  <ion-refresher\n    pulling-text=\"Pull to refresh...\"\n    on-refresh=\"$ctrl.refresh()\">\n  </ion-refresher>\n<ion-list>\n\n  <form>\n    <ion-item class=\"item-input-inset dark-bg item-borderless\">\n      <label class=\"item-input-wrapper\">\n        <input type=\"search\" placeholder=\"Search shop\" ng-model=\"query\">\n      </label>\n      <button type=\"button\" class=\"button button-clear button-stable\" ng-click=\"$ctrl.search(query)\"><i class=\"icon ion-search\"></i></button>\n    </ion-item>\n  </form>\n  <item-select-modal item-class=\"item-divider\" ng-model=\"$ctrl.category\" on-select=\"$ctrl.filterChange(value)\" options=\"$ctrl.categories\" text-key=\"name\" value-key=\"id\" title=\"Select category\" default-text=\"All category\">\n    <label class=\"h4\">Filter: </label>\n  </item-select-modal>\n  <shop-list-item ng-repeat=\"shop in $ctrl.shops\" shop=\"shop\">\n  </shop-list-item>\n\n</ion-list>\n  <ion-infinite-scroll\n    on-infinite=\"$ctrl.loadMore()\"\n    distance=\"1%\"\n    ng-if=\"$ctrl.showLoadmore\"\n  >\n  </ion-infinite-scroll>\n</ion-content>\n"
 
 /***/ },
 /* 34 */
@@ -1382,7 +1383,7 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "<ion-item class=\"shop-item item-button-right\" >\n  <div ui-sref=\"sidemenu.home.shopDetail({id:$ctrl.shop.id})\">\n    <p>{{$ctrl.shop.name}}</p>\n    <p class=\"item-content\">\n      {{$ctrl.shop.description}}\n    </p>\n  </div>\n  <div class=\"row\">\n    <div class=\"col\">\n      <follow-button shop=\"$ctrl.shop\"></follow-button>\n    </div>\n    <div class=\"col\">\n      <message-button shop=\"$ctrl.shop\" class=\"shop-item-btn\"></message-button>\n    </div>\n  </div>\n  \n</ion-item>\n"
+	module.exports = "<div class=\"list card no-margin\" ui-sref=\"sidemenu.shopDetail({id:$ctrl.shop.id})\" style=\"position:relative;\">\n  <div class=\"item item-image\" style=\"position:relative;\">\n    <img ng-src=\"{{$ctrl.shop.cover}}\">\n  </div>\n  <div class=\"item item-thumbnail-left item-button-right item-borderless\" style=\"position:absolute;width:100%;bottom:0px;background-color:rgba(0,0,0,0.3)\">\n    <div class=\"item-image shop-image\" style=\"background-image:url({{$ctrl.shop.image}}),url(http://placehold.it/200x200);\"></div>\n    <h2 style=\"color:white;\" >{{$ctrl.shop.name}}</h2>\n    <p style=\"color:white;\">{{$ctrl.shop.description}}</p>\n    <div class=\"buttons\">\n      <message-button shop=\"$ctrl.shop\"></message-button>\n    </div>\n  </div>\n</div>"
 
 /***/ },
 /* 39 */
@@ -2835,7 +2836,7 @@
 /* 94 */
 /***/ function(module, exports) {
 
-	module.exports = "<shop-detail-header shop=\"$ctrl.shop\">\n\n</shop-detail-header>\n<ion-content scroll=\"false\" style=\"top:200px;\">\n  <product-list product-detail-state=\"sidemenu.home.shopProductDetail\" shop-id=\"$ctrl.shop.id\" style=\"height:300px;\"></product-list>\n</ion-content>\n"
+	module.exports = "<ion-content>\n  <product-list product-detail-state=\"sidemenu.productDetail\" shop-id=\"$ctrl.shop.id\">\n    <shop-detail-header shop=\"$ctrl.shop\">\n    </shop-detail-header>\n  </product-list>\n</ion-content>\n"
 
 /***/ },
 /* 95 */
@@ -2920,7 +2921,7 @@
 /* 99 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"row\">\n  <div class=\"shop-image\" style=\"background-image:url({{$ctrl.shop.image}}),url(http://placehold.it/200x200);\">\n\n  </div>\n  <div class=\"col\">\n    <div>{{$ctrl.shop.name}}</div>\n    <div>{{$ctrl.shop.location.formatted_address || \"Unknown\"}}</div>\n    <div class=\"row\">\n      <div class=\"col\">\n        <follow-button shop=\"$ctrl.shop\"></follow-button>\n      </div>\n      <div class=\"col\">\n        <message-button shop=\"$ctrl.shop\"></message-button>\n      </div>\n    </div>\n  </div>\n</div>\n"
+	module.exports = "<div class=\"list card no-margin\" style=\"position:relative;\">\n  <div class=\"item item-image\" style=\"background-image:url({{$ctrl.shop.cover}});height:200px;background-size:cover;background-position:center center;\">\n  </div>\n  <div class=\"item item-thumbnail-left item-borderless\" style=\"position:absolute;bottom:0px;width:100%;background-color:rgba(0,0,0,0.3)\">\n    <div class=\"item-image shop-image\" style=\"background-image:url({{$ctrl.shop.image}}),url(http://placehold.it/200x200);\"></div>\n    <h2 style=\"color:white;\">{{$ctrl.shop.name}}</h2>\n    <p style=\"color:white;\">{{$ctrl.shop.description}}</p>\n    <p style=\"color:white;\">{{$ctrl.shop.location.formatted_address || \"Unknown\"}}</p>\n  </div>\n</div>\n\n"
 
 /***/ },
 /* 100 */
@@ -2992,10 +2993,7 @@
 	
 	var deliveryLocationPickerComponent = {
 	  restrict: 'E',
-	  bindings: {
-	    shopId: '=',
-	    addressChange: '&'
-	  },
+	  bindings: {},
 	  template: _deliveryLocationPicker2.default,
 	  controller: _deliveryLocationPicker4.default
 	};
@@ -3056,26 +3054,34 @@
 	    self.locationIndex = -1;
 	
 	    //Get current position
-	    self.currentLocation = navigator.geolocation.getCurrentPosition(function (position) {
+	    console.log('getting current position');
+	    navigator.geolocation.getCurrentPosition(function (position) {
 	      console.log(position);
 	      var geolocation = {
 	        lat: position.coords.latitude,
 	        lng: position.coords.longitude
 	      };
-	      var formatted_address = "";
-	      var currentLocation = {
-	        geolocation: geolocation,
-	        formatted_address: formatted_address
-	      };
 	      var geocoder = new google.maps.Geocoder();
 	      geocoder.geocode({ 'location': geolocation }, function (results, status) {
 	        console.log(results);
 	        if (status === 'OK') {
-	          currentLocation.formatted_address = results[0].formatted_address;
+	          self.currentLocation = {
+	            geolocation: geolocation,
+	            formatted_address: results[0].formatted_address
+	          };
+	          if (!self.deliveryLocation.geolocation) {
+	            self._cartBuilder.setDeliveryLocation(self.currentLocation, true).then(function (newAddress) {
+	              console.log(newAddress);
+	              $timeout(function () {
+	                self.deliveryLocation = newAddress;
+	              });
+	            });
+	          }
 	        }
 	      });
-	      return currentLocation;
-	    });
+	    }, function (err) {
+	      console.log(err);
+	    }, { timeout: 30000, enableHighAccuracy: true, maximumAge: 75000 });
 	  }
 	
 	  _createClass(DeliveryLocationPickerController, [{
@@ -3090,7 +3096,9 @@
 	    value: function openModal() {
 	      var self = this;
 	      console.log('Open modal');
-	      self.fetchUserInfo();
+	      if (self._Customer.isAuthenticated()) {
+	        self.fetchUserInfo();
+	      }
 	      this.modal.show();
 	    }
 	  }, {
@@ -4724,12 +4732,7 @@
 	        controllerAs: '$ctrl'
 	      }
 	    },
-	    resolve: {
-	      getCurrentUser: ['Customer', function (Customer) {
-	        return Customer.getCurrent().$promise;
-	      }]
-	    }
-	
+	    resolve: {}
 	  });
 	}).name;
 	
@@ -4768,7 +4771,7 @@
 /* 164 */
 /***/ function(module, exports) {
 
-	module.exports = "<ion-view>\n  <ion-side-menus>\n    <ion-side-menu-content>\n      <ion-nav-bar class=\"bar-dark\">\n        <ion-nav-back-button ng-click=\"$ctrl.goBack()\"></ion-nav-back-button>\n        <ion-nav-buttons side=\"right\">\n          <!-- Toggle right side menu -->\n          <my-cart ui-sref=\"sidemenu.myShoppingCart\" menu-close></my-cart>\n          <button ng-click=\"$ctrl.toggleSidebar()\" class=\"button button-icon icon ion-navicon\"></button>\n        </ion-nav-buttons>\n      </ion-nav-bar>\n\n      <ion-nav-view name=\"sidemenu-content\"></ion-nav-view>\n    </ion-side-menu-content>\n    <ion-side-menu side=\"right\">\n      <ion-list>\n        <ion-item ui-sref=\"sidemenu.dashboard\" menu-close>\n          Dashboard\n        </ion-item>\n        <ion-item ui-sref=\"sidemenu.home.shopping\" menu-close>\n          Home\n        </ion-item>\n        <ion-item ui-sref=\"sidemenu.myProfile\" menu-close>\n          My profile\n        </ion-item>\n        <ion-item ui-sref=\"sidemenu.chatList\" menu-close>\n          Chat\n        </ion-item>\n        <ion-item class=\"item-icon-right\" ui-sref=\"sidemenu.myShoppingCart\" menu-close>\n          My shopping cart\n          <span class=\"badge badge-positive\">{{$ctrl.myCartCount()}}</span>\n        </ion-item>\n        <ion-item class=\"item-icon-right\" ui-sref=\"sidemenu.myWishlist\" menu-close>\n          My wishlist\n          <span class=\"badge badge-positive\">{{$ctrl.wishListCount()}}</span>\n        </ion-item>\n        <ion-item ui-sref=\"sidemenu.myOrders\" menu-close>\n          My orders\n        </ion-item>\n        <ion-item ui-sref=\"logout\" menu-close>\n          Logout\n        </ion-item>\n      </ion-list>\n    </ion-side-menu>\n  </ion-side-menus>\n\n</ion-view>\n"
+	module.exports = "<ion-view>\n  <ion-side-menus>\n    <ion-side-menu-content>\n      <ion-nav-bar class=\"bar-dark\">\n        <ion-nav-back-button ng-click=\"$ctrl.goBack()\"></ion-nav-back-button>\n        <ion-nav-buttons side=\"right\">\n          <!-- Toggle right side menu -->\n          <my-cart ui-sref=\"sidemenu.myShoppingCart\" menu-close></my-cart>\n          <button ng-click=\"$ctrl.toggleSidebar()\" class=\"button button-icon icon ion-navicon\"></button>\n        </ion-nav-buttons>\n      </ion-nav-bar>\n\n      <ion-nav-view name=\"sidemenu-content\"></ion-nav-view>\n    </ion-side-menu-content>\n    <ion-side-menu side=\"right\" class=\"mysidebar padding\">\n      <ion-list class=\"\">\n        <ion-item class=\"item-borderless\" ui-sref=\"sidemenu.home\" menu-close>\n          Home\n        </ion-item>\n        <ion-item class=\"item-borderless\" ui-sref=\"sidemenu.myProfile\" menu-close ng-if=\"$ctrl.isAuthenticated\">\n          My profile\n        </ion-item>\n        <ion-item class=\"item-borderless\" ui-sref=\"sidemenu.chatList\" menu-close ng-if=\"$ctrl.isAuthenticated\">\n          Chat\n        </ion-item>\n        <ion-item class=\"item-icon-right item-borderless\" ui-sref=\"sidemenu.myShoppingCart\" menu-close>\n          My shopping cart\n          <span class=\"badge badge-positive\">{{$ctrl.myCartCount()}}</span>\n        </ion-item>\n        <ion-item class=\"item-icon-right item-borderless\" ui-sref=\"sidemenu.myWishlist\" menu-close>\n          My wishlist\n          <span class=\"badge badge-positive\">{{$ctrl.wishListCount()}}</span>\n        </ion-item>\n        <ion-item class=\"item-borderless\" ui-sref=\"sidemenu.myOrders\" menu-close ng-if=\"$ctrl.isAuthenticated\">\n          My orders\n        </ion-item>\n        <ion-item class=\"item-borderless\" ui-sref=\"logout\" menu-close ng-if=\"$ctrl.isAuthenticated\">\n          Logout\n        </ion-item>\n        <ion-item class=\"item-borderless\" ui-sref=\"login\" menu-close ng-if=\"!$ctrl.isAuthenticated\">\n          Login\n        </ion-item>\n      </ion-list>\n    </ion-side-menu>\n  </ion-side-menus>\n\n</ion-view>\n"
 
 /***/ },
 /* 165 */
@@ -4785,7 +4788,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var SidemenuController = function () {
-	  function SidemenuController($ionicHistory, $ionicSideMenuDelegate, $localStorage, cartBuilder) {
+	  function SidemenuController($ionicHistory, $ionicSideMenuDelegate, $localStorage, cartBuilder, Customer) {
 	    _classCallCheck(this, SidemenuController);
 	
 	    this.name = 'sidemenu';
@@ -4795,6 +4798,7 @@
 	      wishList: []
 	    });
 	    this._CartBuilder = cartBuilder;
+	    this.isAuthenticated = Customer.isAuthenticated();
 	  }
 	
 	  _createClass(SidemenuController, [{
@@ -4826,7 +4830,7 @@
 	  return SidemenuController;
 	}();
 	
-	SidemenuController.$inject = ['$ionicHistory', '$ionicSideMenuDelegate', '$localStorage', 'cartBuilder'];
+	SidemenuController.$inject = ['$ionicHistory', '$ionicSideMenuDelegate', '$localStorage', 'cartBuilder', 'Customer'];
 	
 	exports.default = SidemenuController;
 
@@ -5033,7 +5037,7 @@
 /* 175 */
 /***/ function(module, exports) {
 
-	module.exports = "<ion-view>\n  <ion-tabs class=\"tabs-striped tabs-color-positive tabs-top\">\n\n    <ion-tab title=\"Shopping\" href=\"{{$ctrl.getStateUrl('sidemenu.home.shopping')}}\" on-deselect=\"$ctrl.clearHistory()\">\n      <!-- Tab 1 content -->\n      <ion-nav-view name=\"home-shopping-content\"></ion-nav-view>\n\n    </ion-tab>\n\n    <!--<ion-tab title=\"Services\"  href=\"{{$ctrl.getStateUrl('sidemenu.home.services')}}\">\n      <ion-nav-view name=\"home-services-content\"></ion-nav-view>\n    </ion-tab>-->\n\n    <ion-tab title=\"Shops\" href=\"{{$ctrl.getStateUrl('sidemenu.home.shops')}}\" on-deselect=\"$ctrl.clearHistory()\">\n      <!-- Tab 3 content -->\n      <ion-nav-view name=\"home-shops-content\"></ion-nav-view>\n    </ion-tab>\n  </ion-tabs>\n  \n</ion-view>\n"
+	module.exports = "<ion-view view-title=\"Shops\">\n  <!--​<ion-tabs class=\"tabs-striped tabs-color-positive tabs-top\">\n\n    <ion-tab title=\"Shopping\" href=\"{{$ctrl.getStateUrl('sidemenu.home.shopping')}}\" on-deselect=\"$ctrl.clearHistory()\">\n      <ion-nav-view name=\"home-shopping-content\"></ion-nav-view>\n\n    </ion-tab>\n\n    <ion-tab title=\"Shops\" href=\"{{$ctrl.getStateUrl('sidemenu.home.shops')}}\" on-deselect=\"$ctrl.clearHistory()\">\n      <ion-nav-view name=\"home-shops-content\"></ion-nav-view>\n    </ion-tab>\n  </ion-tabs>-->\n  <ion-content scroll=\"false\" class=\"has-footer\">\n    <shop-list></shop-list>\n  </ion-content>\n  <div class=\"bar bar-footer bar-dark\">\n    <delivery-location-picker></delivery-location-picker>\n  </div>\n  \n</ion-view>\n\n"
 
 /***/ },
 /* 176 */
@@ -5401,12 +5405,12 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var MyOrdersController = function () {
-	  function MyOrdersController(getCurrentUser, Customer, $scope) {
+	  function MyOrdersController(Customer, $scope) {
 	    _classCallCheck(this, MyOrdersController);
 	
 	    this.name = 'myOrders';
 	    this.statusFilter = 'pending';
-	    this.user = getCurrentUser;
+	    this.userId = Customer.getCurrentId();
 	    this._Customer = Customer;
 	    this._$scope = $scope;
 	    this.orders = [];
@@ -5423,7 +5427,7 @@
 	    key: 'fetchOrders',
 	    value: function fetchOrders() {
 	      var self = this;
-	      this._Customer.orders({ id: this.user.id, filter: {
+	      this._Customer.orders({ id: this.userId, filter: {
 	          include: ['shop', { orderItems: ['product', 'productValuePack'] }]
 	        } }).$promise.then(function (orders) {
 	        self.orders = orders;
@@ -5438,7 +5442,7 @@
 	  return MyOrdersController;
 	}();
 	
-	MyOrdersController.$inject = ['getCurrentUser', 'Customer', '$scope'];
+	MyOrdersController.$inject = ['Customer', '$scope'];
 	
 	exports.default = MyOrdersController;
 
@@ -6042,10 +6046,10 @@
 	var productDetailModule = angular.module('productDetailPage', ['ionic']).config(function ($stateProvider) {
 	  "ngInject";
 	
-	  $stateProvider.state('sidemenu.home.productDetail', {
+	  $stateProvider.state('sidemenu.productDetail', {
 	    url: '/product/:id',
 	    views: {
-	      'home-shopping-content': {
+	      'sidemenu-content': {
 	        template: _productDetail2.default.template,
 	        controller: _productDetail2.default.controller,
 	        controllerAs: '$ctrl'
@@ -6184,10 +6188,10 @@
 	var shopDetailModule = angular.module('shopDetailPage', ['ionic']).config(function ($stateProvider) {
 	  "ngInject";
 	
-	  $stateProvider.state('sidemenu.home.shopDetail', {
+	  $stateProvider.state('sidemenu.shopDetail', {
 	    url: '/shopDetail/:id',
 	    views: {
-	      'home-shops-content': {
+	      'sidemenu-content': {
 	        template: _shopDetail2.default.template,
 	        controller: _shopDetail2.default.controller,
 	        controllerAs: '$ctrl'
@@ -6488,7 +6492,7 @@
 	      LoopBackAuth.clearUser();
 	      LoopBackAuth.clearStorage();
 	      console.log("Logged out");
-	      $state.go('login');
+	      $state.go('sidemenu.home');
 	    }, function (response) {
 	      console.log("Log out failed");
 	      console.log(response);
@@ -9553,23 +9557,29 @@
 	
 	  }, {
 	    key: 'setDeliveryLocation',
-	    value: function setDeliveryLocation(address) {
+	    value: function setDeliveryLocation(address, skipPrompt) {
 	      var self = this;
-	      var confirmPopup = this._$ionicPopup.confirm({
-	        title: 'Change delivery location',
-	        template: 'You will lost all item in the cart, Do you want to continue?'
-	      });
-	
-	      return confirmPopup.then(function (res) {
-	        if (res) {
-	          console.log('You are sure');
-	          self._localStorage.deliveryLocation = address;
-	          self._localStorage.myCart = {};
-	        } else {
-	          console.log('You are not sure');
-	        }
-	        return self._localStorage.deliveryLocation;
-	      });
+	      console.log('set delivery location');
+	      if (!skipPrompt) {
+	        var confirmPopup = this._$ionicPopup.confirm({
+	          title: 'Change delivery location',
+	          template: 'You will lost all item in the cart, Do you want to continue?'
+	        });
+	        return confirmPopup.then(function (res) {
+	          if (res) {
+	            console.log('You are sure');
+	            self._localStorage.deliveryLocation = address;
+	            self._localStorage.myCart = {};
+	          } else {
+	            console.log('You are not sure');
+	          }
+	          return self._localStorage.deliveryLocation;
+	        });
+	      } else {
+	        self._localStorage.deliveryLocation = address;
+	        self._localStorage.myCart = {};
+	        return Promise.resolve(self._localStorage.deliveryLocation);
+	      }
 	    }
 	  }, {
 	    key: 'getDeliveryLocation',

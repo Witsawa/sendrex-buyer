@@ -9923,15 +9923,10 @@ image-picker {
     background-repeat: no-repeat; }
   image-picker.circle .preview-image {
     border-radius: 50%; }
-shop-detail-header .shop-image {
-  margin: 5px;
-  width: 90px;
-  height: 0px;
-  padding-bottom: 90px;
+.shop-image {
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover;
-  border-radius: 50%; }
+  background-size: cover; }
 delivery-location-picker {
   bottom: 0px;
   width: 100%;
@@ -10001,6 +9996,9 @@ typing-area .item-input-wrapper {
   width: 100%; }
   typing-area .item-input-wrapper textarea {
     width: 100%; }
+.mysidebar .item, .mysidebar .item .item-content, .mysidebar {
+  background-color: #444;
+  color: #fff; }
 .login-form {
   margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.9); }
