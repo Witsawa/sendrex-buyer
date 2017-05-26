@@ -25,6 +25,7 @@ import MessageButton from './messageButton/messageButton'
 import ChatRoom from './chatRoom/chatRoom'
 import ChatList from './chatList/chatList'
 import MultiImagePicker from './multiImagePicker/multiImagePicker'
+import PaymentMethodSelector from './paymentMethodSelector/paymentMethodSelector'
 let componentModule = angular.module('app.components', [
   ProductList,
   ProductListItem,
@@ -52,7 +53,8 @@ let componentModule = angular.module('app.components', [
   MessageButton,
   ChatRoom,
   MultiImagePicker,
-  ChatList
+  ChatList,
+  PaymentMethodSelector
 ])
 
 .name;

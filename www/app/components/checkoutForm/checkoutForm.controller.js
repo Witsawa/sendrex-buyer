@@ -7,6 +7,10 @@ class CheckoutFormController {
     this._$q = $q
     this._$state = $state
     this.currency = "THB"
+    this.paymentMethod = {
+      method: {},
+      card: {}
+    }
     this.deliveryLocation = this._cartBuilder.getDeliveryLocation()
     this.fetchData()
   }
@@ -15,21 +19,31 @@ class CheckoutFormController {
     let datas = this._cartBuilder.getAllCart()
     console.log(datas)
     self._Order.getCartsInfo({carts:datas}).$promise.then((result)=>{
-      this.data = result
+      self.data = result
     },(error)=>{
       console.log("Cannot create order (multiple)")
     })
   }
   checkout() {
+    if(!this.paymentMethod.method.name){
+      return
+    }
+    if(this.paymentMethod.method.name == "Credit card" && Object.keys(this.paymentMethod.card).length == 0){
+      return
+    }
     let self = this
     let datas = this._cartBuilder.getAllCart()
     console.log(datas)
     let promises = []
     Object.keys(datas).forEach((shopId)=>{
       var data = angular.copy(datas[shopId])
-      data['charge'] = {
-        source:'omise',card_token:this.card.id,currency:'thb'
+      data['payment_channel'] = this.paymentMethod.method.name
+      if(this.paymentMethod.method.name == "Credit card"){
+        data['charge'] = {
+          source:'omise',card_token:this.paymentMethod.card.id,currency:'thb'
+        }
       }
+      
       promises.push(self._Order.create(data).$promise)
     })
 

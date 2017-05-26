@@ -85,7 +85,7 @@ angular.module('starter', [
     //LoopBackResourceProvider.setUrlBase('https://send-rex.herokuapp.com/api');
     //LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
 
-    $urlRouterProvider.otherwise('/sidemenu/home/shopping');
+    $urlRouterProvider.otherwise('/sidemenu/home');
 
     $ionicConfigProvider.views.maxCache(0);
 

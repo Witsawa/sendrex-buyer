@@ -1,0 +1,15 @@
+
+<div class="list">
+  <div class="item item-borderless">
+    <label>Select payment methods</label>
+    <div class="list list-inset">
+      <ion-radio ng-model="$ctrl.ngModel.method" ng-value="method" ng-repeat="method in $ctrl.paymentMethods">{{method.name}}</ion-radio>
+    </div>
+  </div>
+  <div class="item item-borderless" ng-if="$ctrl.ngModel.method.name == 'Credit card'">
+    <label>Select credit card</label>
+    <div class="list list-inset">
+        <credit-card-select-item ng-model="$ctrl.ngModel.card"></credit-card-select-item>
+    </div>
+  </div>
+</div>

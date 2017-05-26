@@ -68,8 +68,7 @@ class DeliveryLocationPickerController {
   }
   edit(location){
     let self = this
-    self.editIndex = self.user.delivery_locations.indexOf(location)
-    console.log(location)
+    self.editIndex = self.user?self.user.delivery_locations.indexOf(location):-1
     if(!location){
       self.editIndex = -1
       location = {
@@ -97,13 +96,22 @@ class DeliveryLocationPickerController {
     let self = this
     let index = self.editIndex
     console.log(index)
-    if(index != -1){
-      self.user.delivery_locations[index] = self.editLocation
-      
+    if(self.user){
+      if(index != -1){
+        self.user.delivery_locations[index] = self.editLocation
+        
+      }else{
+        self.user.delivery_locations.push(self.editLocation)
+      }
+      this.saveUserProfile()
     }else{
-      self.user.delivery_locations.push(self.editLocation)
+      self.locationIndex = -1
+      self.currentLocation = self.editLocation.address
+      if(self.editModal){
+        self.editModal.remove()
+      }
+      self.done()
     }
-    this.saveUserProfile()
     
   }
   saveUserProfile(){

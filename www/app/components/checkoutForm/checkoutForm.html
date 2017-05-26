@@ -38,9 +38,10 @@
       </div>
     </ion-item>
   </div>
-  <div class="list list-inset">
+  <!--<div class="list list-inset">
     <credit-card-select-item ng-model="$ctrl.card"></credit-card-select-item>
-  </div>
+  </div>-->
+  <payment-method-selector shop="$ctrl.shop" ng-model="$ctrl.paymentMethod"></payment-method-selector>
 </ion-content>
 
 <div class="dark-bg light" style="height:auto;position:absolute;bottom:0px;width:100%;">

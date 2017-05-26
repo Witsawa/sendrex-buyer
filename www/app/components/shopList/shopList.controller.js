@@ -1,5 +1,5 @@
 class ShopListController {
-  constructor($scope,Shop,$ionicLoading,BusinessCategory) {
+  constructor($scope,Shop,$ionicLoading,BusinessCategory,cartBuilder) {
     let self = this
     this.name = 'shopList';this._$scope = $scope
     this._Shop = Shop
@@ -14,30 +14,48 @@ class ShopListController {
     this.shops = [];
     this.query = '';
     this.page = 0;
+    this._cartBuilder =cartBuilder
+    $scope.$watch(function () {
+      return self._cartBuilder.getDeliveryLocation()
+    }, function (newVal) {
+      console.log("New location", newVal)
+      self.refresh()
+    })
 
   }
-  fetchShop(onSuccess,onError,onFinally){
+  fetchShop(onSuccess,onError,onFinally,clearData = false){
     let filter = {
       filter:{
         skip:this.page * 10,
-        limit:10
+        limit:10,
+        where: {}
       }
     }
     let self = this
-    if(this.query != ''){
-      filter.filter['where'] = {
-        name:{
-          like:'%'+this.query+'%'
-        }
+    if(this._cartBuilder.getDeliveryLocation().geolocation){
+      filter.filter['where']['location_geolocation'] = {
+        near: this._cartBuilder.getDeliveryLocation().geolocation,
+        maxDistance: 10,
+        unit: 'kilometers'
       }
     }
-    if(this.category!=0){
+    if(this.query != ''){
+      filter.filter['where']['name'] = {
+          ilike:'%'+this.query+'%'
+        }
+    }
+    if(this.category!=0){ 
       filter.filter.where? (filter.filter.where['businessCategoryId'] = this.category):filter.filter['where'] = {businessCategoryId:this.category}
     }
     console.log(filter)
     this._Shop.find(filter).$promise.then(function(shops){
-      self.shops = self.shops.concat(shops)
-      self.page += 1
+      if(clearData){
+        self.page = 0
+        self.shops = []
+      }else{
+        self.shops = self.shops.concat(shops)
+        self.page += 1
+      }
       onSuccess(shops)
     },function(){
       onError()
@@ -50,8 +68,6 @@ class ShopListController {
   refresh(){
     //reset page
     //clear product list
-    this.page = 0
-    this.shops = []
     let self = this
     this.fetchShop(()=>{
       self.showLoadmore = true
@@ -59,7 +75,7 @@ class ShopListController {
 
     },()=>{
       self._$scope.$broadcast('scroll.refreshComplete');
-    })
+    }, true)
 
   }
   search(query){
@@ -101,6 +117,6 @@ class ShopListController {
   }
 }
 
-ShopListController.$inject = ['$scope','Shop','$ionicLoading','BusinessCategory']
+ShopListController.$inject = ['$scope','Shop','$ionicLoading','BusinessCategory','cartBuilder']
 
 export default ShopListController;
