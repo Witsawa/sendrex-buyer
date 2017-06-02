@@ -66,8 +66,8 @@ class cartBuilder{
       if (product.selectedProductVariantId == null || product.selectedProductVariantId == undefined) {
         throw invalidException
       }
-
-      product.productOptions.forEach((option)=>{
+      let options = product.productOptions || []
+      options.forEach((option)=>{
         //check option
         let selected = false
         option.productOptionValues.forEach((optionValue)=>{
@@ -112,7 +112,8 @@ class cartBuilder{
       product_option_values:[]
     }
     //create option
-    product.productOptions.forEach((option)=>{
+    let options = product.productOptions || []
+    options.forEach((option)=>{
       option.productOptionValues.forEach((optionValue)=>{
         if(optionValue.checked){
           postData.product_option_values.push(optionValue.id)
@@ -154,7 +155,8 @@ class cartBuilder{
 
 
     //map option
-    let optionValues = product.productOptions.reduce((result,option)=>{
+    let options = product.productOptions || []
+    let optionValues = options.reduce((result,option)=>{
       result = result.concat(option.productOptionValues.map((optionValue)=>{
         let clonedOption = angular.copy(option)
         delete clonedOption.productOptionValues

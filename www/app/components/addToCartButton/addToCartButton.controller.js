@@ -66,7 +66,8 @@ class AddToCartButtonController {
       newVal.products.forEach((product)=>{
         let productVariant = self._$filter('filter')(product.productVariants,{id:product.selectedProductVariantId})[0]
         console.log(productVariant)
-        let optionPrice = product.productOptions.reduce((result,option)=>{
+        let options = product.productOptions || []
+        let optionPrice = options.reduce((result,option)=>{
           let optionValuePrice = option.productOptionValues.reduce((result2,optionValue)=>{
             if(optionValue.checked) {
               result2 += optionValue.price

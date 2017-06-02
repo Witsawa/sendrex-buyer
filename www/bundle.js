@@ -782,7 +782,8 @@
 	        newVal.products.forEach(function (product) {
 	          var productVariant = self._$filter('filter')(product.productVariants, { id: product.selectedProductVariantId })[0];
 	          console.log(productVariant);
-	          var optionPrice = product.productOptions.reduce(function (result, option) {
+	          var options = product.productOptions || [];
+	          var optionPrice = options.reduce(function (result, option) {
 	            var optionValuePrice = option.productOptionValues.reduce(function (result2, optionValue) {
 	              if (optionValue.checked) {
 	                result2 += optionValue.price;
@@ -9551,8 +9552,8 @@
 	        if (product.selectedProductVariantId == null || product.selectedProductVariantId == undefined) {
 	          throw invalidException;
 	        }
-	
-	        product.productOptions.forEach(function (option) {
+	        var options = product.productOptions || [];
+	        options.forEach(function (option) {
 	          //check option
 	          var selected = false;
 	          option.productOptionValues.forEach(function (optionValue) {
@@ -9598,7 +9599,8 @@
 	        product_option_values: []
 	      };
 	      //create option
-	      product.productOptions.forEach(function (option) {
+	      var options = product.productOptions || [];
+	      options.forEach(function (option) {
 	        option.productOptionValues.forEach(function (optionValue) {
 	          if (optionValue.checked) {
 	            postData.product_option_values.push(optionValue.id);
@@ -9641,6 +9643,7 @@
 	      var productVariant = self._$filter('filter')(product.productVariants, { id: productItem.productVariantId })[0];
 	
 	      //map option
+	      var options = product.productOptions || [];
 	      var optionValues = product.productOptions.reduce(function (result, option) {
 	        result = result.concat(option.productOptionValues.map(function (optionValue) {
 	          var clonedOption = angular.copy(option);
