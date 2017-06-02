@@ -1,8 +1,9 @@
 class CheckoutFormController {
-  constructor(cartBuilder,Order,$q,$state) {
+  constructor(cartBuilder,Order,$q,$state,Customer) {
     this.name = 'checkoutForm';
     this._cartBuilder = cartBuilder
     this._Order = Order
+    this._Customer = Customer
     this.card = undefined
     this._$q = $q
     this._$state = $state
@@ -42,7 +43,7 @@ class CheckoutFormController {
         data['charge'] = {
           source:'omise',card_token:this.paymentMethod.card.id,currency:'thb'
         }
-      }
+      } 
       
       promises.push(self._Order.create(data).$promise)
     })
@@ -61,6 +62,6 @@ class CheckoutFormController {
     })*/
   }
 }
-CheckoutFormController.$inject = ['cartBuilder','Order','$q','$state']
+CheckoutFormController.$inject = ['cartBuilder','Order','$q','$state','Customer']
 
 export default CheckoutFormController;

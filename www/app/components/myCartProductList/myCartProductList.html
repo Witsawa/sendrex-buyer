@@ -28,7 +28,7 @@
         Delivery fee: {{cart.deliveryFee | currency:cart.shop.currency}}
       </div>
       <div class="text-right">
-        Total: {{(cart.total+cart.deliveryFee-cart.discount) | currency:cart.shop.currency}}
+        Total: {{(cart.total) | currency:cart.shop.currency}}
       </div>
     </ion-item>
   </div>
@@ -101,60 +101,8 @@
   </div>
   <div class="row" ng-if="!$ctrl.no_item">
     <div class="col">
-      <button class="button button-positive button-block no-margin" ng-click="$ctrl.checkout()">Check out - {{$ctrl.carts.total | currency:$ctrl.currency}} </button>
+      <button class="button button-positive button-block no-margin" ng-click="$ctrl.checkoutButtonHandler()">Check out - {{$ctrl.carts.total | currency:$ctrl.currency}} </button>
     </div>
   </div>
   
 </div>
-<!--<div class="list list-inset" ng-repeat="cart in $ctrl.carts">
-
-  <ion-item class="item-divider">
-    {{cart.shop.name}}
-  </ion-item>
-  <ion-list can-swipe="true">
-    <my-cart-product-list-item item="item" currency="$ctrl.currency" remove-from-cart="$ctrl.removeFromCart(item )" ng-repeat="item in cart.order_items">
-    </my-cart-product-list-item>
-  </ion-list>
-  <ion-item class="item-input item-select">
-    <div class="input-label">
-      Delivery method
-    </div>
-    <select ng-model="cart.delivery_method" ng-change="$ctrl.setDeliveryMethod(cart.shop.id,cart.delivery_method)">
-      <option value="" disabled selected hidden>please select</option>
-      <option value="Delivery">Delivery</option>
-      <option value="Take away">Take away</option>
-    </select>
-  </ion-item>
-  <div ng-show="cart.delivery_method == 'Delivery'">
-    <location-picker ng-change="$ctrl.setDeliveryAddress(cart.shop.id,cart.delivery_address)" title="Select Delivery Location" ng-model="cart.delivery_address">
-
-    </location-picker>
-    <ion-item>
-      Delivery fee
-    <span class="item-note dark">
-      {{cart.delivery_fee||0 | currency:cart.shop.currency}}
-    </span>
-    </ion-item>
-  </div>
-  <ion-item>
-    Total
-    <span class="item-note dark">
-      {{cart.totalPrice | currency:cart.shop.currency}}
-    </span>
-  </ion-item>
-  <div class="text-right padding-top">
-    <checkout-button shop-id="cart.shop.id" condition="cart.delivery_method!=''"></checkout-button>
-  </div>
-</div>
-
-<div class="list list-inset">
-  <ion-item>
-    Total
-    <span class="item-note dark">
-      {{$ctrl.totalPrice | currency:$ctrl.currency}}
-    </span>
-  </ion-item>
-</div>
-
-  <checkout-button></checkout-button>
--->

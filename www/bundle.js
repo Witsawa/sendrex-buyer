@@ -72,7 +72,7 @@
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _ngFileUpload = __webpack_require__(275);
+	var _ngFileUpload = __webpack_require__(278);
 	
 	var _ngFileUpload2 = _interopRequireDefault(_ngFileUpload);
 	
@@ -1825,7 +1825,7 @@
 /* 58 */
 /***/ function(module, exports) {
 
-	module.exports = "<ion-content style=\"bottom:120px;\">\n  <div class=\"row row-center\" ng-if=\"$ctrl.no_item\">\n    <div class=\"col col-center\">\n      No items\n    </div>\n  </div>\n  <div class=\"list list-inset\" ng-repeat=\"(shopId,cart) in $ctrl.carts.carts\">\n    <ion-item class=\"item-divider\">\n      {{cart.shop.name}}\n      <span class=\"item-note\">\n        {{cart.delivery.delivery_time}} {{cart.delivery.delivery_time_unit}}\n      </span>\n    </ion-item>\n    <ion-item>\n      <ion-list can-swipe=\"true\">\n        <my-cart-product-list-item item=\"item\" currency=\"cart.shop.currency\" remove-from-cart=\"$ctrl.removeFromCart(cart.shop.id,$index)\" ng-repeat=\"item in cart.orderItems\">\n        </my-cart-product-list-item>\n      </ion-list>\n    </ion-item>\n    <ion-item>\n      <div class=\"text-right\">\n        Sub total: {{cart.total | currency:cart.shop.currency}}\n      </div>\n      <div class=\"text-right\">\n        Discount: {{cart.discount | currency:cart.shop.currency}}\n      </div>\n      <div class=\"text-right\">\n        Delivery fee: {{cart.deliveryFee | currency:cart.shop.currency}}\n      </div>\n      <div class=\"text-right\">\n        Total: {{(cart.total+cart.deliveryFee-cart.discount) | currency:cart.shop.currency}}\n      </div>\n    </ion-item>\n  </div>\n  <!--<ion-slides ion-wizard slider=\"swiper\" options=\"swiperOptions\" ng-if=\"$ctrl.carts.length > 0\">\n    <ion-slide-page ion-wizard-step ng-repeat=\"cart in $ctrl.carts\">\n      <ion-content>\n        <div class=\"list list-inset\">\n          <ion-item class=\"item-divider\">\n            {{cart.shop.name}}\n          </ion-item>\n          <ion-item>\n            <ion-list can-swipe=\"true\">\n              <my-cart-product-list-item item=\"item\" currency=\"$ctrl.currency\" remove-from-cart=\"$ctrl.removeFromCart(cart.shopId,$index)\" ng-repeat=\"item in cart.order_items\">\n              </my-cart-product-list-item>\n            </ion-list>\n          </ion-item>\n          <ion-item>\n            <delivery-location-picker shop-id=\"cart.shop.id\" address-change=\"$ctrl.deliveryAddressChanged()\"></delivery-location-picker>\n          </ion-item>\n          \n        </div>\n        <div class=\"row\">\n          <span class=\"col text-right\" style=\"margin-top:-20px;\">\n            Total: {{cart.totalPrice | currency:cart.shop.currency}}\n          </span>\n        </div>\n      </ion-content>\n    </ion-slide-page>\n    <ion-slide-page ion-wizard-step>\n      <ion-content>\n        <div class=\"list list-inset\">\n          <div class=\"item item-divider\">Summary</div >\n          <ion-item ng-repeat=\"cart in $ctrl.carts\">\n            <div class=\"row\">\n              <div class=\"col no-padding\">\n                {{cart.shop.name}}\n              </div>\n              <div class=\"col  no-padding text-right\">\n                {{cart.totalPrice | currency:cart.shop.currency}}\n              </div>\n            </div>\n            <div class=\"row \">\n              <div class=\"col  no-padding\">\n                Item: {{cart.order_items.length}}\n              </div>\n            </div>\n            <div class=\"row\">\n              <div class=\"col  no-padding text-wrap\">\n                {{cart.delivery_address.formatted_address}}, <span>{{cart.delivery_time}}</span>\n              </div>\n            </div>\n            \n          </ion-item>\n        </div>\n      </ion-content>\n    </ion-slide-page>-->\n    \n  </ion-slides>\n</ion-content>\n<div class=\"dark-bg light\" style=\"height:auto;position:absolute;bottom:0px;width:100%;\">\n  <div class=\"row\">\n    <div class=\"col\">\n      <p style=\"width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\">\n        Delivery to {{$ctrl.deliveryLocation.formatted_address}}\n      </p>\n    </div>\n  </div>\n  <div class=\"row\" ng-if=\"!$ctrl.no_item\">\n    <div class=\"col\">\n      <button class=\"button button-positive button-block no-margin\" ng-click=\"$ctrl.checkout()\">Check out - {{$ctrl.carts.total | currency:$ctrl.currency}} </button>\n    </div>\n  </div>\n  \n</div>\n<!--<div class=\"list list-inset\" ng-repeat=\"cart in $ctrl.carts\">\n\n  <ion-item class=\"item-divider\">\n    {{cart.shop.name}}\n  </ion-item>\n  <ion-list can-swipe=\"true\">\n    <my-cart-product-list-item item=\"item\" currency=\"$ctrl.currency\" remove-from-cart=\"$ctrl.removeFromCart(item )\" ng-repeat=\"item in cart.order_items\">\n    </my-cart-product-list-item>\n  </ion-list>\n  <ion-item class=\"item-input item-select\">\n    <div class=\"input-label\">\n      Delivery method\n    </div>\n    <select ng-model=\"cart.delivery_method\" ng-change=\"$ctrl.setDeliveryMethod(cart.shop.id,cart.delivery_method)\">\n      <option value=\"\" disabled selected hidden>please select</option>\n      <option value=\"Delivery\">Delivery</option>\n      <option value=\"Take away\">Take away</option>\n    </select>\n  </ion-item>\n  <div ng-show=\"cart.delivery_method == 'Delivery'\">\n    <location-picker ng-change=\"$ctrl.setDeliveryAddress(cart.shop.id,cart.delivery_address)\" title=\"Select Delivery Location\" ng-model=\"cart.delivery_address\">\n\n    </location-picker>\n    <ion-item>\n      Delivery fee\n    <span class=\"item-note dark\">\n      {{cart.delivery_fee||0 | currency:cart.shop.currency}}\n    </span>\n    </ion-item>\n  </div>\n  <ion-item>\n    Total\n    <span class=\"item-note dark\">\n      {{cart.totalPrice | currency:cart.shop.currency}}\n    </span>\n  </ion-item>\n  <div class=\"text-right padding-top\">\n    <checkout-button shop-id=\"cart.shop.id\" condition=\"cart.delivery_method!=''\"></checkout-button>\n  </div>\n</div>\n\n<div class=\"list list-inset\">\n  <ion-item>\n    Total\n    <span class=\"item-note dark\">\n      {{$ctrl.totalPrice | currency:$ctrl.currency}}\n    </span>\n  </ion-item>\n</div>\n\n  <checkout-button></checkout-button>\n-->\n"
+	module.exports = "<ion-content style=\"bottom:120px;\">\n  <div class=\"row row-center\" ng-if=\"$ctrl.no_item\">\n    <div class=\"col col-center\">\n      No items\n    </div>\n  </div>\n  <div class=\"list list-inset\" ng-repeat=\"(shopId,cart) in $ctrl.carts.carts\">\n    <ion-item class=\"item-divider\">\n      {{cart.shop.name}}\n      <span class=\"item-note\">\n        {{cart.delivery.delivery_time}} {{cart.delivery.delivery_time_unit}}\n      </span>\n    </ion-item>\n    <ion-item>\n      <ion-list can-swipe=\"true\">\n        <my-cart-product-list-item item=\"item\" currency=\"cart.shop.currency\" remove-from-cart=\"$ctrl.removeFromCart(cart.shop.id,$index)\" ng-repeat=\"item in cart.orderItems\">\n        </my-cart-product-list-item>\n      </ion-list>\n    </ion-item>\n    <ion-item>\n      <div class=\"text-right\">\n        Sub total: {{cart.total | currency:cart.shop.currency}}\n      </div>\n      <div class=\"text-right\">\n        Discount: {{cart.discount | currency:cart.shop.currency}}\n      </div>\n      <div class=\"text-right\">\n        Delivery fee: {{cart.deliveryFee | currency:cart.shop.currency}}\n      </div>\n      <div class=\"text-right\">\n        Total: {{(cart.total) | currency:cart.shop.currency}}\n      </div>\n    </ion-item>\n  </div>\n  <!--<ion-slides ion-wizard slider=\"swiper\" options=\"swiperOptions\" ng-if=\"$ctrl.carts.length > 0\">\n    <ion-slide-page ion-wizard-step ng-repeat=\"cart in $ctrl.carts\">\n      <ion-content>\n        <div class=\"list list-inset\">\n          <ion-item class=\"item-divider\">\n            {{cart.shop.name}}\n          </ion-item>\n          <ion-item>\n            <ion-list can-swipe=\"true\">\n              <my-cart-product-list-item item=\"item\" currency=\"$ctrl.currency\" remove-from-cart=\"$ctrl.removeFromCart(cart.shopId,$index)\" ng-repeat=\"item in cart.order_items\">\n              </my-cart-product-list-item>\n            </ion-list>\n          </ion-item>\n          <ion-item>\n            <delivery-location-picker shop-id=\"cart.shop.id\" address-change=\"$ctrl.deliveryAddressChanged()\"></delivery-location-picker>\n          </ion-item>\n          \n        </div>\n        <div class=\"row\">\n          <span class=\"col text-right\" style=\"margin-top:-20px;\">\n            Total: {{cart.totalPrice | currency:cart.shop.currency}}\n          </span>\n        </div>\n      </ion-content>\n    </ion-slide-page>\n    <ion-slide-page ion-wizard-step>\n      <ion-content>\n        <div class=\"list list-inset\">\n          <div class=\"item item-divider\">Summary</div >\n          <ion-item ng-repeat=\"cart in $ctrl.carts\">\n            <div class=\"row\">\n              <div class=\"col no-padding\">\n                {{cart.shop.name}}\n              </div>\n              <div class=\"col  no-padding text-right\">\n                {{cart.totalPrice | currency:cart.shop.currency}}\n              </div>\n            </div>\n            <div class=\"row \">\n              <div class=\"col  no-padding\">\n                Item: {{cart.order_items.length}}\n              </div>\n            </div>\n            <div class=\"row\">\n              <div class=\"col  no-padding text-wrap\">\n                {{cart.delivery_address.formatted_address}}, <span>{{cart.delivery_time}}</span>\n              </div>\n            </div>\n            \n          </ion-item>\n        </div>\n      </ion-content>\n    </ion-slide-page>-->\n    \n  </ion-slides>\n</ion-content>\n<div class=\"dark-bg light\" style=\"height:auto;position:absolute;bottom:0px;width:100%;\">\n  <div class=\"row\">\n    <div class=\"col\">\n      <p style=\"width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\">\n        Delivery to {{$ctrl.deliveryLocation.formatted_address}}\n      </p>\n    </div>\n  </div>\n  <div class=\"row\" ng-if=\"!$ctrl.no_item\">\n    <div class=\"col\">\n      <button class=\"button button-positive button-block no-margin\" ng-click=\"$ctrl.checkoutButtonHandler()\">Check out - {{$ctrl.carts.total | currency:$ctrl.currency}} </button>\n    </div>\n  </div>\n  \n</div>\n"
 
 /***/ },
 /* 59 */
@@ -1842,7 +1842,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var MyCartProductListController = function () {
-	  function MyCartProductListController($localStorage, $ionicLoading, Product, $filter, $scope, cartBuilder, $rootScope, $ionicPopup, Customer, $state, $q, Order) {
+	  function MyCartProductListController($localStorage, $ionicLoading, Product, $filter, $scope, cartBuilder, $rootScope, $ionicPopup, Customer, $state, $q, Order, AuthenticationService) {
 	    _classCallCheck(this, MyCartProductListController);
 	
 	    this.name = 'myCartProductList';
@@ -1863,6 +1863,7 @@
 	    this._$state = $state;
 	    this._$q = $q;
 	    this._Order = Order;
+	    this._AuthenticationService = AuthenticationService;
 	    this.currency = "THB";
 	    this.deliveryLocation = this._cartBuilder.getDeliveryLocation();
 	    this.no_item = true;
@@ -1919,12 +1920,26 @@
 	      console.log('addressChange');
 	      this.carts = this._cartBuilder.getDetailedItems();
 	    }
+	  }, {
+	    key: 'checkoutButtonHandler',
+	    value: function checkoutButtonHandler() {
+	      var self = this;
+	      if (this._Customer.getCurrentId()) {
+	        self.checkout();
+	      } else {
+	        console.log("Error");
+	        this._AuthenticationService.login();
+	        /* self.login().then(()=>{
+	          self.checkout()
+	        }) */
+	      }
+	    }
 	  }]);
 	
 	  return MyCartProductListController;
 	}();
 	
-	MyCartProductListController.$inject = ['$localStorage', '$ionicLoading', 'Product', '$filter', '$scope', 'cartBuilder', '$rootScope', '$ionicPopup', 'Customer', '$state', '$q', 'Order'];
+	MyCartProductListController.$inject = ['$localStorage', '$ionicLoading', 'Product', '$filter', '$scope', 'cartBuilder', '$rootScope', '$ionicPopup', 'Customer', '$state', '$q', 'Order', 'AuthenticationService'];
 	
 	exports.default = MyCartProductListController;
 
@@ -2121,11 +2136,11 @@
 	      }else{
 	        this._$state.go('login')
 	      }*/
-	      this._Customer.getCurrent().$promise.then(function (user) {
-	        self.checkout(user, shopId);
-	      }, function () {
-	        console.log("Error");
-	      });
+	      /*this._Customer.getCurrent().$promise.then((user)=>{
+	        self.checkout(user,shopId)
+	      },()=>{
+	        console.log("Error")
+	      })*/
 	    }
 	  }, {
 	    key: 'checkout',
@@ -3359,12 +3374,13 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var CheckoutFormController = function () {
-	  function CheckoutFormController(cartBuilder, Order, $q, $state) {
+	  function CheckoutFormController(cartBuilder, Order, $q, $state, Customer) {
 	    _classCallCheck(this, CheckoutFormController);
 	
 	    this.name = 'checkoutForm';
 	    this._cartBuilder = cartBuilder;
 	    this._Order = Order;
+	    this._Customer = Customer;
 	    this.card = undefined;
 	    this._$q = $q;
 	    this._$state = $state;
@@ -3434,7 +3450,7 @@
 	  return CheckoutFormController;
 	}();
 	
-	CheckoutFormController.$inject = ['cartBuilder', 'Order', '$q', '$state'];
+	CheckoutFormController.$inject = ['cartBuilder', 'Order', '$q', '$state', 'Customer'];
 	
 	exports.default = CheckoutFormController;
 
@@ -5094,7 +5110,8 @@
 	    value: function login() {
 	      var self = this;
 	      this._Customer.login(this.credential, function () {
-	        var next = self._$location.nextAfterLogin || '/sidemenu/home/shopping';
+	        var next = self._$location.nextAfterLogin || '/sidemenu/home';
+	        if (next == '/login') next = '/sidemenu/home';
 	        self._$location.nextAfterLogin = null;
 	        self._$location.path(next);
 	      });
@@ -9407,10 +9424,14 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
+	var _authenticationService = __webpack_require__(275);
+	
+	var _authenticationService2 = _interopRequireDefault(_authenticationService);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	console.log(_index2.default);
-	var directivesModule = angular.module('directives', [_cartService2.default, _omiseService2.default, _index2.default]).name;
+	var directivesModule = angular.module('services', [_cartService2.default, _omiseService2.default, _index2.default, _authenticationService2.default]).name;
 	
 	exports.default = directivesModule;
 
@@ -41398,11 +41419,105 @@
 /* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(276);
-	module.exports = 'ngFileUpload';
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _angular = __webpack_require__(268);
+	
+	var _angular2 = _interopRequireDefault(_angular);
+	
+	var _authService = __webpack_require__(276);
+	
+	var _authService2 = _interopRequireDefault(_authService);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var AuthenticationServiceModule = _angular2.default.module('AuthenticationServiceModule', []).service('AuthenticationService', _authService2.default).name;
+	exports.default = AuthenticationServiceModule;
 
 /***/ },
 /* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by nattaphatlaoharawee on 11/1/2016 AD.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+	
+	
+	var _loginModal = __webpack_require__(277);
+	
+	var _loginModal2 = _interopRequireDefault(_loginModal);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var authService = function () {
+	  function authService($ionicPopup, $rootScope, $state) {
+	    _classCallCheck(this, authService);
+	
+	    this.name = 'authService';
+	    this._$ionicPopup = $ionicPopup;
+	    this._$rootScope = $rootScope;
+	    this._$state = $state;
+	  }
+	
+	  _createClass(authService, [{
+	    key: 'login',
+	    value: function login() {
+	      var self = this;
+	      var myPopup = this._$ionicPopup.confirm({
+	        title: 'Authentication required',
+	        subTitle: 'You will be send to login page'
+	      });
+	      myPopup.then(function (res) {
+	        if (res) {
+	          console.log('You are sure');
+	          self._$state.go('login');
+	        } else {
+	          console.log('You are not sure');
+	        }
+	      });
+	      /*console.log('loggin in', this.loginModal)
+	      this.loginModal.scope.credential = {
+	        email: '',
+	        password: ''
+	      }
+	      this.loginModal.show()*/
+	    }
+	  }]);
+	
+	  return authService;
+	}();
+	
+	authService.$inject = ['$ionicPopup', '$rootScope', '$state'];
+	
+	exports.default = authService;
+
+/***/ },
+/* 277 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"text-center\">\n    <div class=\"row\">\n      <div class=\"col-80 col-offset-10\">\n        <button class=\"button button-light button-block\" ui-sref=\"login\">Sign in</button>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-80 col-offset-10\">\n        <button class=\"button button-light button-block\" ui-sref=\"register\">Sign with facebook</button>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-80 col-offset-10\">\n        <button class=\"button button-light button-block\" ui-sref=\"register\">Create your account</button>\n      </div>\n    </div>\n</div>"
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(279);
+	module.exports = 'ngFileUpload';
+
+/***/ },
+/* 279 */
 /***/ function(module, exports) {
 
 	/**!

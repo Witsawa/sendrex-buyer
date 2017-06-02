@@ -1,5 +1,5 @@
 class MyCartProductListController {
-  constructor($localStorage,$ionicLoading,Product,$filter,$scope,cartBuilder,$rootScope,$ionicPopup,Customer,$state,$q,Order) {
+  constructor($localStorage,$ionicLoading,Product,$filter,$scope,cartBuilder,$rootScope,$ionicPopup,Customer,$state,$q,Order,AuthenticationService) {
     this.name = 'myCartProductList';
     let self = this
     this._$filter =$filter
@@ -18,6 +18,7 @@ class MyCartProductListController {
     this._$state = $state
     this._$q = $q
     this._Order = Order
+    this._AuthenticationService = AuthenticationService
     this.currency = "THB"
     this.deliveryLocation = this._cartBuilder.getDeliveryLocation()
     this.no_item = true
@@ -68,9 +69,21 @@ class MyCartProductListController {
     console.log('addressChange')
     this.carts = this._cartBuilder.getDetailedItems()
   }
+  checkoutButtonHandler() {
+    let self = this
+    if(this._Customer.getCurrentId()){
+      self.checkout()
+    }else{
+      console.log("Error")
+      this._AuthenticationService.login()
+      /* self.login().then(()=>{
+        self.checkout()
+      }) */
+    }
+  }
 }
 
 
-MyCartProductListController.$inject =['$localStorage','$ionicLoading','Product','$filter','$scope','cartBuilder','$rootScope','$ionicPopup','Customer','$state','$q','Order']
+MyCartProductListController.$inject =['$localStorage','$ionicLoading','Product','$filter','$scope','cartBuilder','$rootScope','$ionicPopup','Customer','$state','$q','Order','AuthenticationService']
 
 export default MyCartProductListController;

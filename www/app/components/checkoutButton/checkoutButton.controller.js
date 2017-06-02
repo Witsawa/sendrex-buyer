@@ -17,11 +17,11 @@ class CheckoutButtonController {
     }else{
       this._$state.go('login')
     }*/
-    this._Customer.getCurrent().$promise.then((user)=>{
+    /*this._Customer.getCurrent().$promise.then((user)=>{
       self.checkout(user,shopId)
     },()=>{
       console.log("Error")
-    })
+    })*/
   }
 
   checkout(user,shopId){

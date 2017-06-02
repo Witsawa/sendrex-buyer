@@ -10,7 +10,9 @@ class LoginController {
   login(){
     let self = this
     this._Customer.login(this.credential, function() {
-      let next = self._$location.nextAfterLogin || '/sidemenu/home/shopping';
+      let next = self._$location.nextAfterLogin || '/sidemenu/home';
+      if(next == '/login')
+        next = '/sidemenu/home'
       self._$location.nextAfterLogin = null;
       self._$location.path(next);
     });
