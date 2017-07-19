@@ -4,3 +4,12 @@
   color: $light;
   
 }
+
+.mysidebar .item-content {
+	padding-top: 6px;
+	padding-bottom: 6px;
+
+	.badge {
+		top: 6px;
+	}
+}
