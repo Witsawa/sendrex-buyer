@@ -6,7 +6,7 @@
   <ion-list>
     <ng-transclude></ng-transclude>
     <form>
-      <ion-item class="item-input-inset item-borderless dark-bg">
+      <ion-item class="item-input-inset item-borderless background-gradient">
         <label class="item-input-wrapper">
           <input type="search" placeholder="Search product" ng-model="query">
         </label>
@@ -14,7 +14,7 @@
       </ion-item>
     </form>
     <item-select-modal item-class="item-divider" ng-model="$ctrl.category" on-select="$ctrl.filterChange(value)" options="$ctrl.categories" text-key="name" value-key="id" title="Select category" default-text="All category">
-      <label class="h4">Filter: </label>
+      <label><b>Filter: </b></label>
     </item-select-modal>
     <div class="row responsive-sm">
       <product-list-item ng-repeat="product in $ctrl.products" class="col col-50" product="product" ng-click="$ctrl.viewProduct(product.id)">
