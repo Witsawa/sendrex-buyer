@@ -4,11 +4,12 @@
   "description": "An Ionic project",
   "dependencies": {
     "axios": "^0.15.3",
+    "express": "^4.16.2",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^2.0.4",
+    "gulp-sass": "^3.1.0",
     "ng-file-upload": "^12.2.13"
   },
   "devDependencies": {
@@ -25,7 +26,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-template": "^4.0.0",
     "gulp-util": "^2.2.14",
-    "node-sass": "^3.10.0",
+    "node-sass": "^4.5.3",
     "path": "^0.12.7",
     "raw-loader": "^0.5.1",
     "sass-loader": "^4.0.2",
@@ -46,6 +47,8 @@
     "android"
   ],
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --colors --content-base www/"
-  }
+    "start": "webpack-dev-server --hot --inline --colors --content-base www/",
+    "build": "gulp"
+  },
+  "main": "server.js"
 }

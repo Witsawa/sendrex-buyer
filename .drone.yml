@@ -1,0 +1,24 @@
+pipeline:
+  install:
+    image: node:8-alpine
+    commands:
+      - npm install
+      - npm run build
+  build:
+    image: plugins/docker
+    repo: registry.witsawa.com/miracartbuyer
+    registry: registry.witsawa.com
+    tags: latest
+    dockerfile: dockerfile.dist
+    username: witsawa
+    password: Witsawa122333
+  # deploy:
+  #   image: peloton/drone-rancher
+  #   url: https://rancher.witsawa.com
+  #   access_key: 1B20C29A22D091C05446
+  #   secret_key: d2M6qaDgPLvewXDYs4WGt1wCGwh5FXwiFqiJCrEv
+  #   service: Evermed/evermedapi
+  #   docker_image: registry.witsawa.com/evermedapi:latest
+  #   confirm: true
+  
+branches: master
